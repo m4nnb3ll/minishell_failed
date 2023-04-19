@@ -1,0 +1,45 @@
+```
+command_line	: pipeline
+				;
+
+pipeline		: simple_command pipeline_p
+				;
+
+pipeline_p		: T_PIPE simple_command pipeline_p
+				| T_SPACE T_PIPE simple_command pipeline_p
+				| ε
+				;
+
+simple_command	: cmd_name simple_command_p
+				;
+simple_command_p: cmd_suffix
+				| ε
+				;
+
+cmd_name     	: word cmd_name
+				| ε
+				;
+
+cmd_suffix		: io_redirect cmd_suffix
+				| ε
+				;
+
+io_redirect  	: T_IN_REDIR word
+				| T_SPACE T_IN_REDIR word
+            	| T_OUT_REDIR word
+				| T_SPACE T_OUT_REDIR word
+            	| T_APPEND word
+				| T_SPACE T_APPEND word
+            	| T_HEREDOC word
+				| T_SPACE T_HEREDOC word
+				;
+
+word			: T_IDENTIFIER
+				| T_SPACE T_IDENTIFIER
+				| T_S_QUOTE
+				| T_SPACE T_S_QUOTE
+				| T_D_QUOTE
+				| T_SPACE T_D_QUOTE
+				| T_DOLLAR
+				| T_SPACE T_DOLLAR
+```
