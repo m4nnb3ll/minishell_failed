@@ -6,13 +6,13 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:45:29 by abelayad          #+#    #+#             */
-/*   Updated: 2023/04/12 20:46:21 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:27:31 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 
-int	ft_append_separator(t_type type, char **str_ptr, t_token **token_list)
+int	ft_append_separator(t_type type, char **line_ptr, t_token **token_list)
 {
 	t_token	*token;
 
@@ -20,78 +20,53 @@ int	ft_append_separator(t_type type, char **str_ptr, t_token **token_list)
 	if (!token)
 		return (0);
 	ft_append_token(token_list, token);
-	(*str_ptr)++;
-	if (type == T_HEREDOC || type == T_APPEND)
-		(*str_ptr)++;
+	(*line_ptr)++;
+	if (type == T_DLESS || type == T_DGREAT || type == T_OR || type == T_AND)
+		(*line_ptr)++;
 	return (1);
 }
 
-int	ft_append_quoted_str(char **str_ptr, t_token **token_list)
+bool	ft_skip_quotes(char *line, size_t *i)
 {
-	char	*value;
-	t_token	*lst_token;
-	size_t	i;
-	t_type	type;
+	char	quote;
 
-	type = T_S_QUOTE;
-	if (**str_ptr == '\"')
-		type = T_D_QUOTE;
-	i = 0;
-	while ((*str_ptr + 1)[i] != **str_ptr)
-		i++;
-	value = ft_substr(*str_ptr, 0, i + 2);
-	if (!value)
-		return (0);
-	lst_token = ft_new_token(value, type);
-	if (!lst_token)
-		return (free(value), 0);
-	ft_append_token(token_list, lst_token);
-	*str_ptr += i + 2;
-	return (1);
+	quote = line[*i];
+	if (ft_strchr(line + *i + 1, quote))
+	{
+		(*i)++;
+		while (line[*i] != quote)
+			(*i)++;
+		(*i)++;
+		return (true);
+	}
+	return (false);
 }
 
-int	ft_append_dollar_str(char **str, t_token **token_list)
+int	ft_append_identifier(char **line_ptr, t_token **token_list)
 {
-	char	*value;
-	t_token	*lst_token;
-	size_t	i;
-
-	i = 0;
-	while ((*str + 1)[i] && !ft_is_separator((*str + 1)[i])
-			&& !ft_is_quote((*str + 1)[i]))
-		i++;
-	value = ft_substr(*str, 0, i + 1);
-	if (!value)
-		return (0);
-	lst_token = ft_new_token(value, T_DOLLAR);
-	if (!lst_token)
-		return (free(value), 0);
-	ft_append_token(token_list, lst_token);
-	*str += i + 1;
-	return (1);
-}
-
-int	ft_append_identifier(char **str_ptr, t_token **token_list)
-{
+	char	*tmp_line;
 	char	*value;
 	t_token	*token;
 	size_t	i;
 
+	tmp_line = *line_ptr;
 	i = 0;
-	while ((*str_ptr + 1)[i] && !ft_is_separator((*str_ptr + 1)[i]))
+	while (tmp_line[i] && !ft_is_separator(tmp_line[i]))
 	{
-		if (ft_is_quote((*str_ptr + 1)[i])
-			&& ft_strchr(*str_ptr + i + 2, (*str_ptr + 1)[i]))
-			break ;
-		i++;
+		if (ft_is_quote(tmp_line[i]))
+		{
+			if (!ft_skip_quotes(tmp_line, &i))
+				return (ft_putstr_fd(QUOTE_ERR, 2), 0);
+		}
+		else
+			i++;
 	}
-	value = ft_substr(*str_ptr, 0, i + 1);
+	value = ft_substr(tmp_line, 0, i + 1);
 	if (!value)
 		return (0);
 	token = ft_new_token(value, T_IDENTIFIER);
 	if (!token)
 		return (free(value), 0);
-	ft_append_token(token_list, token);
-	*str_ptr += i + 1;
-	return (1);
+	*line_ptr += i + 1;
+	return (ft_append_token(token_list, token), 1);
 }

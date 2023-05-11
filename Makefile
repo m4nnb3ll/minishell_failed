@@ -1,18 +1,25 @@
-NAME := minishell
+NAME		:= minishell
 
-LIBFT := libft.a
-LIBFT_PATH := "libraries/libft"
+LIBFT		:= libft.a
+LIBFT_PATH	:= "libraries/libft"
 
-CC := cc
-CFLAGS := -Wall -Werror -Wextra
+CC			:= cc
+CFLAGS		:= -Wall -Werror -Wextra -g
 
-SRCS := tokenizer/tokenizer_appenders.c\
-		tokenizer/tokenizer_lst.c\
-		tokenizer/tokenizer_utils.c\
-		tokenizer/tokenizer_handlers.c\
-		tokenizer/tokenizer.c\
+TOKENIZER	:=	tokenizer/tokenizer_appenders.c \
+				tokenizer/tokenizer_lst.c \
+				tokenizer/tokenizer_utils.c \
+				tokenizer/tokenizer_handlers.c \
+				tokenizer/tokenizer.c \
 
-OBJS := $(SRCS:.c=.o)
+PARSER		:=	parser/parser.c \
+				parser/parser_test.c \
+				parser/parser_lst.c
+
+SRCS		:=	$(TOKENIZER)\
+				$(PARSER)
+
+OBJS		:= $(SRCS:.c=.o)
 
 %.o: %.c
 	@$(CC) -g $(CFLAGS) -c $< -Iinclude -o $@

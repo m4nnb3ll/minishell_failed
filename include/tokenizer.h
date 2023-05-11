@@ -1,21 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/11 20:07:14 by abelayad          #+#    #+#             */
+/*   Updated: 2023/05/11 20:08:38 by abelayad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
 #include <readline/readline.h>
 #include "libft.h"//remove this later after setting minishell.h
+#include "stdbool.h"//remove this later after setting minishell.h
+
+#define QUOTE_ERR "Error: unclosed quotes!\n"
 
 typedef enum e_type
 {
-	T_IDENTIFIER=42,
-	T_SPACE, // 43
-	T_S_QUOTE, // Single Quote 44
-	T_D_QUOTE, // Double Quote 45
-	T_IN_REDIR, // 46
-	T_OUT_REDIR, // 47
-	T_HEREDOC, // 48
-	T_APPEND, // 49
-	T_PIPE, // 50
-	T_DOLLAR // 51
+	T_IDENTIFIER,
+	T_LESS,
+	T_GREAT,
+	T_DLESS,
+	T_DGREAT,
+	T_PIPE,
+	T_O_PARENT,
+	T_C_PARENT,
+	T_AND,
+	T_OR
 } t_type;
 
 typedef struct s_token
@@ -33,7 +48,6 @@ int		ft_append_dollar_str(char **str, t_token **token_list);
 int		ft_append_identifier(char **str_ptr, t_token **token_list);
 
 // TOKENIZER HANDLERS
-int		ft_handle_space(char **str_ptr, t_token **token_list);
 int		ft_handle_quotes(char **str_ptr, t_token **token_list);
 int		ft_handle_dollar(char **str, t_token **token_list);
 int		ft_handle_separator(char **line, t_token **token_list);
@@ -47,6 +61,7 @@ void	ft_clear_token_list(t_token **lst);
 // TOKENIZER UTILS
 int		ft_is_quote(char c);
 int		ft_is_separator(char c);
+void	ft_skip_spaces(char **line);
 
 // TOKENIZER
 t_token	*ft_tokenize(void);
