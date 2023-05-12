@@ -1,6 +1,6 @@
 #include "parser.h"
 
-t_node	*ft_new_node(char *value, t_type type)
+t_node	*ft_new_node(t_type type, char *value)
 {
 	t_node	*new_node;
 

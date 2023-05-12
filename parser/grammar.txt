@@ -1,5 +1,6 @@
-<complete_cmd> --> Exp(0)
-Exp(p) --> Term {B Exp(q)}
-Term --> U Exp(q) | '(' Exp(0) ')' | <word>
-B --> '<' | '>' | '<<' | '>>' | '|' | '||' | '&&'
-U --> '<' | '>' | '<<' | '>>'
+<complete_cmd>	--> <Exp(0)>
+<Exp(p)> 		--> <Term> {<B> <Exp(q)>}
+Term			--> <U> <T_IDENTIFIER> | '(' <Exp(0)> ')' | <T_IDENTIFIER>
+B				--> '<' | '>' | '<<' | '>>' | '|' | '||' | '&&'
+U				--> '<' | '>' | '<<' | '>>'
+
