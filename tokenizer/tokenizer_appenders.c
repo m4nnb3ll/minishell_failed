@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:45:29 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/11 20:27:31 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:38:45 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	ft_append_identifier(char **line_ptr, t_token **token_list)
 		else
 			i++;
 	}
-	value = ft_substr(tmp_line, 0, i + 1);
+	value = ft_substr(tmp_line, 0, i);
 	if (!value)
 		return (0);
 	token = ft_new_token(value, T_IDENTIFIER);
 	if (!token)
 		return (free(value), 0);
-	*line_ptr += i + 1;
+	*line_ptr += i;
 	return (ft_append_token(token_list, token), 1);
 }

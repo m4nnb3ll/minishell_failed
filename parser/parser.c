@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/13 18:11:31 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:40:07 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,13 @@ t_node	*term()
 		get_next_token();
 		return node;
 	}
-	else if (token->type == '(')
+	else if (token->type == T_O_PARENT)
 	{
 		get_next_token();
 		node = expression(0);
-		if (token->type != ')')
+		write(1, "pass2\n", 6);
+		printf("the token is: %p\n", token);
+		if (!token || token->type != T_C_PARENT)
 			printf("Unclosed parenthesis!\n");
 		get_next_token();
 		return (node);
@@ -208,17 +210,27 @@ void	print_tree(t_node *node)
 		printf("%s", node -> value);
 }
 
+void	print_tokens(t_token *tokens)
+{
+	while (tokens)
+	{
+		printf("%s\n", types[tokens->type]);
+		tokens = tokens -> next;
+	}
+}
+
 int main()
 {
-	t_node	*tree;
+	// t_node	*tree;
 
 	token = ft_tokenize();
-	tree = parse_command();
+	print_tokens(token);
+	// tree = parse_command();
 	// printf("first node is: %s %s\n", types[tree->type], tree->value);
 	// if (tree -> left)
 	// 	printf("left node is: %s\n", types[tree->left->type]);
 	// if (tree -> right)
 	// 	printf("right node is: %s\n", types[tree->right->type]);
-	print_tree(tree);
+	// print_tree(tree);
 	printf("\n");
 }
