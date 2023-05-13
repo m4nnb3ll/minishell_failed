@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/12 01:36:46 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:11:31 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 char	*types[] = 
 {
 	"T_IDENTIFIER",
-	"T_LESS",
-	"T_GREAT",
-	"T_DLESS",
-	"T_DGREAT",
-	"T_PIPE",
-	"T_O_PARENT",
-	"T_C_PARENT",
-	"T_AND",
-	"T_OR"
+	"<",
+	">",
+	"<<",
+	">>",
+	"|",
+	"OP",
+	"CP",
+	"&&",
+	"||"
 };
 
 
@@ -64,11 +64,11 @@ bool	is_binop(t_type type)
 
 int	prec(t_type type)
 {
-	if (type == T_AND)
-		return (2);
 	if (type == T_OR)
+		return (0);
+	if (type == T_AND)
 		return (1);
-	return (0);
+	return (3);
 }
 
 t_node	*term()
@@ -84,7 +84,7 @@ t_node	*term()
 		if (token->type != T_IDENTIFIER)
 			printf("Error near %d!\n", token->type);
 		node = ft_new_node(op, NULL);
-		node -> left = ft_new_node(0, token->value);
+		node -> right = ft_new_node(0, token->value);
 		get_next_token();
 		return node;
 	}
@@ -158,34 +158,54 @@ void	print_space(int	size)
 	}
 }
 
-void	print_tree(t_node *node, int space_size)
+// void	print_tree(t_node *node, int space_size)
+// {
+// 	if (node -> type)
+// 	{
+// 		print_space(space_size);
+// 		printf("type: %s", types[node -> type]);
+// 		if (node -> value)
+// 			printf(" ");
+// 		else
+// 			printf("\n");
+// 	}
+// 	if (node -> value)
+// 	{
+// 		print_space(space_size);
+// 		printf("value: %s\n", node -> value);
+// 	}
+// 	if (node -> left)
+// 	{
+// 		print_space(space_size + 1);
+// 		printf("left:");
+// 		print_tree(node -> left, space_size + 2);
+// 	}
+// 	if (node -> right)
+// 	{
+// 		print_space(space_size + 1);
+// 		printf("right:");
+// 		print_tree(node -> right, space_size + 2);
+// 	}
+// }
+
+void	print_tree(t_node *node)
 {
 	if (node -> type)
 	{
-		print_space(space_size);
-		printf("type: %s", types[node -> type]);
-		if (node -> value)
+		printf("(");
+		if (node -> left)
+			print_tree(node -> left);
+		if (is_binop(node->type) || is_unaop(node->type))
 			printf(" ");
-		else
-			printf("\n");
+		printf("%s", types[node->type]);
+		if (is_binop(node->type) || is_unaop(node->type))
+			printf(" ");
+		if (node -> right)
+			print_tree(node -> right);
+		printf(")");
 	}
-	if (node -> value)
-	{
-		print_space(space_size);
-		printf("value: %s\n", node -> value);
-	}
-	if (node -> left)
-	{
-		print_space(space_size + 1);
-		printf("left:");
-		print_tree(node -> left, space_size + 2);
-	}
-	if (node -> right)
-	{
-		print_space(space_size + 1);
-		printf("right:");
-		print_tree(node -> right, space_size + 2);
-	}
+	else if (node -> value)
+		printf("%s", node -> value);
 }
 
 int main()
@@ -199,5 +219,6 @@ int main()
 	// 	printf("left node is: %s\n", types[tree->left->type]);
 	// if (tree -> right)
 	// 	printf("right node is: %s\n", types[tree->right->type]);
-	print_tree(tree, 0);
+	print_tree(tree);
+	printf("\n");
 }
