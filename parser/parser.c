@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/13 18:40:07 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/13 19:09:06 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ char	*types[] =
 
 t_token *token;
 t_node	*tree = NULL;
-
-
 
 void	get_next_token();
 bool	is_unaop(t_type type);
@@ -92,8 +90,6 @@ t_node	*term()
 	{
 		get_next_token();
 		node = expression(0);
-		write(1, "pass2\n", 6);
-		printf("the token is: %p\n", token);
 		if (!token || token->type != T_C_PARENT)
 			printf("Unclosed parenthesis!\n");
 		get_next_token();
@@ -224,13 +220,7 @@ int main()
 	// t_node	*tree;
 
 	token = ft_tokenize();
-	print_tokens(token);
-	// tree = parse_command();
-	// printf("first node is: %s %s\n", types[tree->type], tree->value);
-	// if (tree -> left)
-	// 	printf("left node is: %s\n", types[tree->left->type]);
-	// if (tree -> right)
-	// 	printf("right node is: %s\n", types[tree->right->type]);
-	// print_tree(tree);
+	tree = parse_command();
+	print_tree(tree);
 	printf("\n");
 }
