@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 20:07:14 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/11 23:57:15 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/14 01:33:52 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum e_type
 	T_O_PARENT,
 	T_C_PARENT,
 	T_AND,
-	T_OR
+	T_OR,
+	T_CMD//provisional
 } t_type;
 
 typedef struct s_token

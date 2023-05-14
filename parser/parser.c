@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/13 19:09:06 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/14 23:48:05 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ char	*types[] =
 
 
 t_token *token;
-t_node	*tree = NULL;
 
 void	get_next_token();
-bool	is_unaop(t_type type);
 bool	is_binop(t_type type);
 int		prec(t_type type);
 t_node	*term();
@@ -43,19 +41,17 @@ void	get_next_token()
 	token = token -> next;
 }
 
-bool	is_unaop(t_type type)
+bool	is_binop(t_type type)
 {
-	if (type == T_LESS || type == T_GREAT || type == T_DLESS
-		|| type == T_DGREAT)
+	if (type == T_PIPE || type == T_AND || type == T_OR )
 		return (true);
 	return (false);
 }
 
-bool	is_binop(t_type type)
+bool	is_redir(t_type type)
 {
-	if (type == T_LESS || type == T_GREAT || type == T_DLESS
-		|| type == T_DGREAT || type == T_PIPE || type == T_AND 
-		|| type == T_OR )
+	if (type == T_LESS || type == T_GREAT
+		|| type == T_DLESS || type == T_DGREAT)
 		return (true);
 	return (false);
 }
@@ -66,49 +62,100 @@ int	prec(t_type type)
 		return (0);
 	if (type == T_AND)
 		return (1);
-	return (3);
+	return (2);
+}
+
+bool	ft_get_io_list(t_io_node **io_list)
+{
+	t_type		redir_type;
+	t_io_node	*tmp_io_node;
+
+	while (token && is_redir(token->type))
+	{
+		redir_type = token->type;
+		get_next_token();
+		if (token->type != T_IDENTIFIER)
+			return (false);//ERROR
+		tmp_io_node = ft_new_io_node(redir_type, token->value);
+		if (!tmp_io_node)
+			exit(1);
+		ft_append_io_node(io_list, tmp_io_node);
+		get_next_token();
+	}
+	return (1);
+}
+
+void	ft_join_args(char **args)
+{
+	char	*to_free;
+
+	if (!*args)
+		*args = ft_strdup("");
+	if (!*args)
+		exit(1);
+	while (token && token -> type == T_IDENTIFIER)
+	{
+		to_free = *args;
+		*args = ft_strjoin_with(*args, token -> value, ' ');
+		if (!args)
+			exit(1);
+		free(to_free);
+		get_next_token();
+	}
+}
+
+t_node	*get_simple_cmd()
+{
+	t_node	*node;
+
+	node = ft_new_node(T_CMD);
+	while (token
+		&& (token->type == T_IDENTIFIER || is_redir(token->type)))
+	{
+		if (token->type == T_IDENTIFIER)
+			ft_join_args(&(node -> args));
+		else if (is_redir(token->type))
+		{
+			if (!ft_get_io_list(&(node->io_list)))
+			{
+				printf("Syntax error near: %s\n", types[token->type]);
+				exit(1);
+			}
+		}
+	}
+	return (node);
 }
 
 t_node	*term()
 {
 	t_node	*node;
-	t_type	op;
 
-	// printf("<TERM>\ntoken->type: %s\nis_unaop: %d\n", types[token->type], is_unaop(token->type));
-	if (is_unaop(token->type))
+	if (is_binop(token->type))
 	{
-		op = token->type;
-		get_next_token();
-		if (token->type != T_IDENTIFIER)
-			printf("Error near %d!\n", token->type);
-		node = ft_new_node(op, NULL);
-		node -> right = ft_new_node(0, token->value);
-		get_next_token();
-		return node;
+		printf("Syntax error near: %s\n", types[token->type]);
+		exit(1);//tmp
 	}
 	else if (token->type == T_O_PARENT)
 	{
 		get_next_token();
 		node = expression(0);
 		if (!token || token->type != T_C_PARENT)
+		{
 			printf("Unclosed parenthesis!\n");
+			exit(1);//tmp
+		}
 		get_next_token();
 		return (node);
 	}
 	else
-	{
-		node = ft_new_node(token->type, token->value);
-		// printf("token->type is: %s\ntoken->value is: %s\n", types[token->type], token->value);
-		get_next_token();
-		return (node);
-	}
+		return get_simple_cmd();
 }
 
 t_node	*combine(t_type op, t_node *left, t_node *right)
 {
 	t_node	*node;
 
-	node = ft_new_node(op, NULL);
+	node = ft_new_node(op);
 	node -> left = left;
 	node -> right = right;
 	return (node);
@@ -121,21 +168,14 @@ t_node	*expression(int min_prec)
 	int		n_prec;
 	t_type	op;
 
-	// write(1, "pass0\n", 6);
 	left = term();
 	while (token && is_binop(token->type) && prec(token->type) >= min_prec)
 	{
 		op = token->type;
 		get_next_token();
-		// printf("i enter the while\n");
-		// write(1, "pass1\n", 6);
 		n_prec = prec(op) + 1;
-		// write(1, "pass2\n", 6);
-		// write(1, "pass3\n", 6);
-		right= expression(n_prec);
-		// write(1, "pass4\n", 6);
+		right = expression(n_prec);
 		left = combine(op, left, right);
-		// write(1, "pass5\n", 6);
 	}
 	return (left);
 }
@@ -147,63 +187,36 @@ t_node	*parse_command()
 		printf("unexpected end of file!!!\n");
 }
 
-void	print_space(int	size)
-{
-	while(size)
-	{
-		printf("-");
-		size--;
-	}
-}
-
-// void	print_tree(t_node *node, int space_size)
-// {
-// 	if (node -> type)
-// 	{
-// 		print_space(space_size);
-// 		printf("type: %s", types[node -> type]);
-// 		if (node -> value)
-// 			printf(" ");
-// 		else
-// 			printf("\n");
-// 	}
-// 	if (node -> value)
-// 	{
-// 		print_space(space_size);
-// 		printf("value: %s\n", node -> value);
-// 	}
-// 	if (node -> left)
-// 	{
-// 		print_space(space_size + 1);
-// 		printf("left:");
-// 		print_tree(node -> left, space_size + 2);
-// 	}
-// 	if (node -> right)
-// 	{
-// 		print_space(space_size + 1);
-// 		printf("right:");
-// 		print_tree(node -> right, space_size + 2);
-// 	}
-// }
-
 void	print_tree(t_node *node)
 {
-	if (node -> type)
+	t_io_node	*tmp_io_node;
+
+	if (node -> type != T_CMD)
 	{
 		printf("(");
 		if (node -> left)
 			print_tree(node -> left);
-		if (is_binop(node->type) || is_unaop(node->type))
+		if (is_binop(node->type))
 			printf(" ");
 		printf("%s", types[node->type]);
-		if (is_binop(node->type) || is_unaop(node->type))
+		if (is_binop(node->type))
 			printf(" ");
 		if (node -> right)
 			print_tree(node -> right);
 		printf(")");
 	}
-	else if (node -> value)
-		printf("%s", node -> value);
+	else
+	{
+		printf("%s ", node->args);
+		tmp_io_node = node -> io_list;
+		while (tmp_io_node)
+		{
+			printf("%s%s", types[tmp_io_node->type], tmp_io_node->value);
+			tmp_io_node = tmp_io_node -> next;
+			if (tmp_io_node)
+				printf(" ");
+		}
+	}
 }
 
 void	print_tokens(t_token *tokens)
@@ -217,10 +230,16 @@ void	print_tokens(t_token *tokens)
 
 int main()
 {
-	// t_node	*tree;
+	t_node	*tree;
 
-	token = ft_tokenize();
-	tree = parse_command();
-	print_tree(tree);
-	printf("\n");
+	while (1)
+	{
+		token = ft_tokenize();
+		if (!token)
+			continue ;// To be changed later
+		tree = parse_command();
+		print_tree(tree);
+		printf("\n");
+	}
+	// printf("Parsed successfully!\n");
 }

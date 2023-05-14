@@ -14,7 +14,8 @@ TOKENIZER	:=	tokenizer/tokenizer_appenders.c \
 
 PARSER		:=	parser/parser.c \
 				parser/parser_test.c \
-				parser/parser_lst.c
+				parser/parser_nodes.c \
+				# parser/clr_test.c
 
 SRCS		:=	$(TOKENIZER)\
 				$(PARSER)

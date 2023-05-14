@@ -1,6 +1,8 @@
-<complete_cmd>	--> <Exp(0)>
-<Exp(p)> 		--> <Term> {<B> <Exp(q)>}
-Term			--> <U> <T_IDENTIFIER> | '(' <Exp(0)> ')' | <T_IDENTIFIER>
-B				--> '<' | '>' | '<<' | '>>' | '|' | '||' | '&&'
-U				--> '<' | '>' | '<<' | '>>'
-
+<CMD>		--> <EXP(0)>
+<EXP(p)> 	--> <SIMP> {<B> <EXP(q)>}
+<B>			--> '|' | '||' | '&&'
+<SIMP>		--> {
+					name,
+					args,
+					redirections
+				}
