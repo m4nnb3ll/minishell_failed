@@ -6,11 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:41:11 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/11 21:42:20 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:33:25 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "minishell.h"
 
 int	ft_handle_separator(char **line_ptr, t_token **token_list)
 {

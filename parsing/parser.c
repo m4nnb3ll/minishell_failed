@@ -6,12 +6,12 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/15 01:30:09 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:39:02 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
-#include "parser.h"
+#include "minishell.h"
+#include "minishell.h"
 
 char	*types[] = 
 {
@@ -27,18 +27,9 @@ char	*types[] =
 	"||"
 };
 
-
-t_token *token;
-
-void	get_next_token();
-bool	is_binop(t_type type);
-int		prec(t_type type);
-t_node	*term();
-t_node	*expression(int min_prec);
-
 void	get_next_token()
 {
-	token = token -> next;
+	minishell.tokens = minishell.tokens -> next;
 }
 
 bool	is_binop(t_type type)
@@ -70,13 +61,13 @@ bool	ft_get_io_list(t_io_node **io_list)
 	t_type		redir_type;
 	t_io_node	*tmp_io_node;
 
-	while (token && is_redir(token->type))
+	while (minishell.tokens && is_redir(minishell.tokens->type))
 	{
-		redir_type = token->type;
+		redir_type = minishell.tokens->type;
 		get_next_token();
-		if (token->type != T_IDENTIFIER)
+		if (minishell.tokens->type != T_IDENTIFIER)
 			return (false);//ERROR
-		tmp_io_node = ft_new_io_node(redir_type, token->value);
+		tmp_io_node = ft_new_io_node(redir_type, minishell.tokens->value);
 		if (!tmp_io_node)
 			exit(1);
 		ft_append_io_node(io_list, tmp_io_node);
@@ -93,10 +84,10 @@ void	ft_join_args(char **args)
 		*args = ft_strdup("");
 	if (!*args)
 		exit(1);
-	while (token && token -> type == T_IDENTIFIER)
+	while (minishell.tokens && minishell.tokens -> type == T_IDENTIFIER)
 	{
 		to_free = *args;
-		*args = ft_strjoin_with(*args, token -> value, ' ');
+		*args = ft_strjoin_with(*args, minishell.tokens -> value, ' ');
 		if (!args)
 			exit(1);
 		free(to_free);
@@ -109,16 +100,16 @@ t_node	*get_simple_cmd()
 	t_node	*node;
 
 	node = ft_new_node(T_CMD);
-	while (token
-		&& (token->type == T_IDENTIFIER || is_redir(token->type)))
+	while (minishell.tokens
+		&& (minishell.tokens->type == T_IDENTIFIER || is_redir(minishell.tokens->type)))
 	{
-		if (token->type == T_IDENTIFIER)
+		if (minishell.tokens->type == T_IDENTIFIER)
 			ft_join_args(&(node -> args));
-		else if (is_redir(token->type))
+		else if (is_redir(minishell.tokens->type))
 		{
 			if (!ft_get_io_list(&(node->io_list)))
 			{
-				printf("Syntax error near: %s\n", types[token->type]);
+				printf("Syntax error near: %s\n", types[minishell.tokens->type]);
 				exit(1);
 			}
 		}
@@ -130,16 +121,16 @@ t_node	*term()
 {
 	t_node	*node;
 
-	if (is_binop(token->type))
+	if (is_binop(minishell.tokens->type))
 	{
-		printf("Syntax error near: %s\n", types[token->type]);
+		printf("Syntax error near: %s\n", types[minishell.tokens->type]);
 		exit(1);//tmp
 	}
-	else if (token->type == T_O_PARENT)
+	else if (minishell.tokens->type == T_O_PARENT)
 	{
 		get_next_token();
 		node = expression(0);
-		if (!token || token->type != T_C_PARENT)
+		if (!minishell.tokens || minishell.tokens->type != T_C_PARENT)
 		{
 			printf("Unclosed parenthesis!\n");
 			exit(1);//tmp
@@ -169,9 +160,9 @@ t_node	*expression(int min_prec)
 	t_type	op;
 
 	left = term();
-	while (token && is_binop(token->type) && prec(token->type) >= min_prec)
+	while (minishell.tokens && is_binop(minishell.tokens->type) && prec(minishell.tokens->type) >= min_prec)
 	{
-		op = token->type;
+		op = minishell.tokens->type;
 		get_next_token();
 		n_prec = prec(op) + 1;
 		right = expression(n_prec);
@@ -180,10 +171,10 @@ t_node	*expression(int min_prec)
 	return (left);
 }
 
-t_node	*parse()
+t_node	*ft_parse()
 {
 	return expression(0);
-	if (!token)
+	if (!minishell.tokens)
 		printf("unexpected end of file!!!\n");
 }
 

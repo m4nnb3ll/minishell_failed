@@ -6,11 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:13 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/15 01:04:25 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:33:31 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 /*
 	For now the function returns the exec status of each expression

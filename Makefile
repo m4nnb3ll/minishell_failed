@@ -6,19 +6,20 @@ LIBFT_PATH	:= "libraries/libft"
 CC			:= cc
 CFLAGS		:= -Wall -Werror -Wextra -g
 
-TOKENIZER	:=	tokenizer/tokenizer_appenders.c \
-				tokenizer/tokenizer_lst.c \
-				tokenizer/tokenizer_utils.c \
-				tokenizer/tokenizer_handlers.c \
-				tokenizer/tokenizer.c \
+TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
+				tokenizing/tokenizer_lst.c \
+				tokenizing/tokenizer_utils.c \
+				tokenizing/tokenizer_handlers.c \
+				tokenizing/tokenizer.c \
 
-PARSER		:=	parser/parser.c \
-				parser/parser_test.c \
-				parser/parser_nodes.c \
-				# parser/clr_test.c
+PARSING		:=	parsing/parser.c \
+				parsing/parser_test.c \
+				parsing/parser_nodes.c \
+				# parsing/clr_test.c
 
-SRCS		:=	$(TOKENIZER)\
-				$(PARSER)
+SRCS		:=	$(TOKENIZING)\
+				$(PARSING)\
+				main.c
 
 OBJS		:= $(SRCS:.c=.o)
 

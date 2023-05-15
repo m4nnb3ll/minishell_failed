@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   tokenizing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,6 @@
 
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
-
-#include <readline/readline.h>
-#include "libft.h"//remove this later after setting minishell.h
-#include "stdbool.h"//remove this later after setting minishell.h
 
 #define QUOTE_ERR "Error: unclosed quotes!\n"
 

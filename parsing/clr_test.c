@@ -1,5 +1,5 @@
-#include "tokenizer.h"
-#include "parser.h"
+#include "minishell.h"
+#include "minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
 
