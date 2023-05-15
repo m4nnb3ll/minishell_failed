@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/14 23:48:05 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/15 01:30:09 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ t_node	*expression(int min_prec)
 	return (left);
 }
 
-t_node	*parse_command()
+t_node	*parse()
 {
 	return expression(0);
 	if (!token)
@@ -226,20 +226,4 @@ void	print_tokens(t_token *tokens)
 		printf("%s\n", types[tokens->type]);
 		tokens = tokens -> next;
 	}
-}
-
-int main()
-{
-	t_node	*tree;
-
-	while (1)
-	{
-		token = ft_tokenize();
-		if (!token)
-			continue ;// To be changed later
-		tree = parse_command();
-		print_tree(tree);
-		printf("\n");
-	}
-	// printf("Parsed successfully!\n");
 }
