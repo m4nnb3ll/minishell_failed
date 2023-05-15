@@ -13,7 +13,8 @@
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
-#define QUOTE_ERR "Error: unclosed quotes!\n"
+#define S_QUOTE_ERR "msh: unexpected `newline' while looking for matching `''\n"
+#define D_QUOTE_ERR "msh: unexpected `newline' while looking for matching `\"'\n"
 
 typedef enum e_type
 {
@@ -27,19 +28,20 @@ typedef enum e_type
 	T_C_PARENT,
 	T_AND,
 	T_OR,
+	T_NL,
 	T_CMD//provisional
-} t_type;
+} t_token_type;// I am thinking of making own ENUMS for parser
 
 typedef struct s_token
 {
-	t_type			type;
-	char			*value;
-	struct s_token	*next;
-	struct s_token	*prev;
+	t_token_type		type;
+	char				*value;
+	struct s_token		*next;
+	struct s_token		*prev;
 }	t_token;
 
 // TOKENIZER APPENDERS
-int		ft_append_separator(t_type type, char **str_ptr, t_token **token_list);
+int		ft_append_separator(t_token_type type, char **str_ptr, t_token **token_list);
 int		ft_append_quoted_str(char **str_ptr, t_token **token_list);
 int		ft_append_dollar_str(char **str, t_token **token_list);
 int		ft_append_identifier(char **str_ptr, t_token **token_list);
@@ -51,7 +53,7 @@ int		ft_handle_separator(char **line, t_token **token_list);
 t_token	*ft_tokenization_handler(char *line);
 
 // TOKENIZER LIST
-t_token	*ft_new_token(char *value, t_type type);
+t_token	*ft_new_token(char *value, t_token_type type);
 void	ft_append_token(t_token **lst, t_token *new_token);
 void	ft_clear_token_list(t_token **lst);
 

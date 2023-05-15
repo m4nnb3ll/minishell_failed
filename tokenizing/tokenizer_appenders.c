@@ -6,13 +6,13 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:45:29 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/15 15:33:25 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 00:47:52 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_append_separator(t_type type, char **line_ptr, t_token **token_list)
+int	ft_append_separator(t_token_type type, char **line_ptr, t_token **token_list)
 {
 	t_token	*token;
 
@@ -56,7 +56,7 @@ int	ft_append_identifier(char **line_ptr, t_token **token_list)
 		if (ft_is_quote(tmp_line[i]))
 		{
 			if (!ft_skip_quotes(tmp_line, &i))
-				return (ft_putstr_fd(QUOTE_ERR, 2), 0);
+				return (ft_putstr_fd(S_QUOTE_ERR, 2), 0);// handle QUOTE_ERR LATER
 		}
 		else
 			i++;

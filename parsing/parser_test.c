@@ -5,7 +5,7 @@
 
 // // Helper functions START
 
-// int	is_io_redirect(t_type type)
+// int	is_io_redirect(t_token_type type)
 // {
 // 	if (type == T_IN_REDIR
 // 		|| type == T_OUT_REDIR
@@ -16,7 +16,7 @@
 // 	return (0);
 // }
 
-// int	is_word(t_type type)
+// int	is_word(t_token_type type)
 // {
 // 	if (type == T_IDENTIFIER
 // 		|| type == T_S_QUOTE

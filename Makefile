@@ -15,6 +15,7 @@ TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
 PARSING		:=	parsing/parser.c \
 				parsing/parser_test.c \
 				parsing/parser_nodes.c \
+				parsing/parser_err.c\
 				# parsing/clr_test.c
 
 SRCS		:=	$(TOKENIZING)\

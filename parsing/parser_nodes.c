@@ -6,13 +6,13 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:42:23 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/15 15:33:31 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/15 23:45:46 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node	*ft_new_node(t_type type)
+t_node	*ft_new_node(t_token_type type)
 {
     t_node    *new_node;
 
@@ -23,7 +23,7 @@ t_node	*ft_new_node(t_type type)
     return (new_node);
 }
 
-t_io_node	*ft_new_io_node(t_type type, char *value)
+t_io_node	*ft_new_io_node(t_token_type type, char *value)
 {
     t_io_node    *new_node;
 
