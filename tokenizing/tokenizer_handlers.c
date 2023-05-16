@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:41:11 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/15 15:33:25 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 01:23:35 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ t_token	*ft_tokenization_handler(char *line)
 	token_list = NULL;
 	while (*line)
 	{
-		ft_skip_spaces(&line);
 		if (error)
 			return (ft_clear_token_list(&token_list), NULL);
+		if (ft_isspace(*line))
+			ft_skip_spaces(&line);
 		else if (!ft_strncmp(line, "<", 1) || !ft_strncmp(line, ">", 1)
 			|| !ft_strncmp(line, "|", 1) || !ft_strncmp(line, "&&", 2)
 			|| !ft_strncmp(line, "(", 1) || !ft_strncmp(line, ")", 1))
