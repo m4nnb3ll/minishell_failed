@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:28:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 01:25:10 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:54:35 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	main()
 		return (1);
 	printf("Pass\n");
 	// print_token(g_minishell.tokens);
-	// ft_clear_token_list(&g_minishell.tokens);
+	ft_clear_token_list(&g_minishell.tokens);
 	// if (g_minishell.tokens)
-	g_minishell.tree = ft_parse();
-	if (!g_minishell.tree)
-		ft_handle_parse_err();
+	// g_minishell.tree = ft_parse();
+	// if (!g_minishell.tree)
+	// 	ft_handle_parse_err();
 	// print_tree(g_minishell.tree);
 }

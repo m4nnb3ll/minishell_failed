@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.h                                        :+:      :+:    :+:   */
+/*   tokenizing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 20:07:14 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/14 01:33:52 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:50:49 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#ifndef TOKENIZING_H
+# define TOKENIZING_H
 
-#define S_QUOTE_ERR "msh: unexpected `newline' while looking for matching `''\n"
-#define D_QUOTE_ERR "msh: unexpected `newline' while looking for matching `\"'\n"
+# define PROMPT "msh-1.0$ "
 
-typedef enum e_type
+typedef enum e_token_type
 {
 	T_IDENTIFIER,
 	T_LESS,
@@ -29,8 +28,7 @@ typedef enum e_type
 	T_AND,
 	T_OR,
 	T_NL,
-	T_CMD//provisional
-} t_token_type;// I am thinking of making own ENUMS for parser
+}	t_token_type;
 
 typedef struct s_token
 {
@@ -40,29 +38,28 @@ typedef struct s_token
 	struct s_token		*prev;
 }	t_token;
 
-// TOKENIZER APPENDERS
-int		ft_append_separator(t_token_type type, char **str_ptr, t_token **token_list);
-int		ft_append_quoted_str(char **str_ptr, t_token **token_list);
-int		ft_append_dollar_str(char **str, t_token **token_list);
-int		ft_append_identifier(char **str_ptr, t_token **token_list);
+// tokenizer_appenders.c
+int		ft_append_separator(t_token_type type, char **line_ptr,
+			t_token **token_list);
+int		ft_append_identifier(char **line_ptr, t_token **token_list);
 
-// TOKENIZER HANDLERS
-int		ft_handle_quotes(char **str_ptr, t_token **token_list);
-int		ft_handle_dollar(char **str, t_token **token_list);
-int		ft_handle_separator(char **line, t_token **token_list);
+// tokenizer_handlers.c
+int		ft_handle_separator(char **line_ptr, t_token **token_list);
 t_token	*ft_tokenization_handler(char *line);
 
-// TOKENIZER LIST
+// tokenizer_lst.c
 t_token	*ft_new_token(char *value, t_token_type type);
-void	ft_append_token(t_token **lst, t_token *new_token);
+void	ft_token_list_add_back(t_token **lst, t_token *new_token);
 void	ft_clear_token_list(t_token **lst);
 
-// TOKENIZER UTILS
+// tokenizer_utils.c
 int		ft_is_quote(char c);
 int		ft_is_separator(char c);
 void	ft_skip_spaces(char **line);
+bool	ft_skip_quotes(char *line, size_t *i);
+void	ft_print_quote_err(char c);
 
-// TOKENIZER
+// tokenizer.c
 t_token	*ft_tokenize(void);
 
 #endif

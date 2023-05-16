@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 01:01:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/15 23:45:46 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:52:59 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	*ft_new_token(char *value, t_token_type type)
 	return (new_token);
 }
 
-void	ft_append_token(t_token **lst, t_token *new_token)
+void	ft_token_list_add_back(t_token **lst, t_token *new_token)
 {
 	t_token	*curr_node;
 
@@ -57,5 +57,3 @@ void	ft_clear_token_list(t_token **lst)
 	}
 	*lst = NULL;
 }
-// if a problem occurs in the function above
-// try allocating the space for the token_list

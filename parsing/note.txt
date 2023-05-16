@@ -1,4 +1,0 @@
-I was thinking of handling errors by setting the global variable's error
-And before each function executes, it has to check first that the error is NULL
-If it is not NULL, the function does nothing and returns, and i am also thinking
-of making all the AST building function void functions.

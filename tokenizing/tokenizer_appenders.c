@@ -6,40 +6,25 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:45:29 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 01:22:22 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:53:55 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_append_separator(t_token_type type, char **line_ptr, t_token **token_list)
+int	ft_append_separator(t_token_type type, char **line_ptr,
+	t_token **token_list)
 {
 	t_token	*token;
 
 	token = ft_new_token(NULL, type);
 	if (!token)
 		return (0);
-	ft_append_token(token_list, token);
+	ft_token_list_add_back(token_list, token);
 	(*line_ptr)++;
 	if (type == T_DLESS || type == T_DGREAT || type == T_OR || type == T_AND)
 		(*line_ptr)++;
 	return (1);
-}
-
-bool	ft_skip_quotes(char *line, size_t *i)
-{
-	char	quote;
-
-	quote = line[*i];
-	if (ft_strchr(line + *i + 1, quote))
-	{
-		(*i)++;
-		while (line[*i] != quote)
-			(*i)++;
-		(*i)++;
-		return (true);
-	}
-	return (false);
 }
 
 int	ft_append_identifier(char **line_ptr, t_token **token_list)
@@ -56,7 +41,7 @@ int	ft_append_identifier(char **line_ptr, t_token **token_list)
 		if (ft_is_quote(tmp_line[i]))
 		{
 			if (!ft_skip_quotes(tmp_line, &i))
-				return (ft_putstr_fd(S_QUOTE_ERR, 2), 0);// handle QUOTE_ERR LATER
+				return (ft_print_quote_err(tmp_line[i]), 0);
 		}
 		else
 			i++;
@@ -68,5 +53,5 @@ int	ft_append_identifier(char **line_ptr, t_token **token_list)
 	if (!token)
 		return (free(value), 0);
 	*line_ptr += i;
-	return (ft_append_token(token_list, token), 1);
+	return (ft_token_list_add_back(token_list, token), 1);
 }

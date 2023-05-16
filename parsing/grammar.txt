@@ -1,8 +1,0 @@
-<CMD>		--> <EXP(0)>
-<EXP(p)> 	--> <SIMP> {<B> <EXP(q)>}
-<B>			--> '|' | '||' | '&&'
-<SIMP>		--> {
-					name,
-					args,
-					redirections
-				}

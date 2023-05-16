@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 00:00:47 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:41:55 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ void	get_next_token()
 bool	is_binop(t_token_type type)
 {
 	if (type == T_PIPE || type == T_AND || type == T_OR )
+		return (true);
+	return (false);
+}
+
+bool	is_node_binop(t_node_type type)
+{
+	if (type == N_PIPE || type == N_AND || type == N_OR )
 		return (true);
 	return (false);
 }
@@ -93,7 +100,7 @@ t_node	*get_simple_cmd()
 
 	if (g_minishell.parse_err.type)
 		return (NULL);
-	node = ft_new_node(T_CMD);
+	node = ft_new_node(N_CMD);
 	if (!node)
 		return (ft_set_parse_err(E_MEM), NULL);
 	while (g_minishell.curr_token
@@ -134,13 +141,21 @@ t_node	*term()
 		return get_simple_cmd();
 }
 
+/*
+TMP
+*/
+t_node_type	ft_get_node_type(t_token_type type);
+/*
+TMP
+*/
+
 t_node	*combine(t_token_type op, t_node *left, t_node *right)
 {
 	t_node	*node;
 
 	if (g_minishell.parse_err.type)
 		return (NULL);
-	node = ft_new_node(op);
+	node = ft_new_node(ft_get_node_type(op));
 	if (!node)
 		return (ft_set_parse_err(E_MEM), NULL);
 	node -> left = left;
@@ -187,15 +202,15 @@ void	print_tree(t_node *node)
 {
 	t_io_node	*tmp_io_node;
 
-	if (node -> type != T_CMD)
+	if (node -> type != N_CMD)
 	{
 		printf("(");
 		if (node -> left)
 			print_tree(node -> left);
-		if (is_binop(node->type))
+		if (is_node_binop(node->type))
 			printf(" ");
 		printf("%s", types[node->type]);
-		if (is_binop(node->type))
+		if (is_node_binop(node->type))
 			printf(" ");
 		if (node -> right)
 			print_tree(node -> right);
