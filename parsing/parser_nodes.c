@@ -1,17 +1,16 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*	                                                                          */
 /*                                                        :::      ::::::::   */
 /*   parser_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:42:23 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 17:38:36 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:09:02 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 t_node_type	ft_get_node_type(t_token_type type)
 {
@@ -35,25 +34,27 @@ t_io_type	ft_get_io_type(t_token_type type)
 
 t_node	*ft_new_node(t_node_type type)
 {
-    t_node    *new_node;
+	t_node	*new_node;
 
-    new_node = (t_node *)ft_calloc(1, sizeof(t_node));
-    if (!new_node)
-        return (NULL);
-    new_node->type = type;
-    return (new_node);
+	new_node = (t_node *)ft_calloc(1, sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->type = type;
+	return (new_node);
 }
 
 t_io_node	*ft_new_io_node(t_token_type type, char *value)
 {
-    t_io_node    *new_node;
+	t_io_node	*new_node;
 
-    new_node = (t_io_node *)ft_calloc(1, sizeof(t_io_node));
-    if (!new_node)
-        return (NULL);
-    new_node->type = ft_get_io_type(type);
-    new_node->value = value;
-    return (new_node);
+	new_node = (t_io_node *)ft_calloc(1, sizeof(t_io_node));
+	if (!new_node)
+		return (NULL);
+	new_node->type = ft_get_io_type(type);
+	new_node->value = ft_strdup(value);
+	if (!new_node->value)
+		return (free(new_node), NULL);
+	return (new_node);
 }
 
 void	ft_append_io_node(t_io_node **lst, t_io_node *new)

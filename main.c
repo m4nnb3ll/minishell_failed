@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:28:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 18:54:35 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/17 01:10:33 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,39 @@
 
 t_minishell	g_minishell;
 
-/*TEMP___START*/
-char* types[] = {
-	"T_IDENTIFIER",
-	"<",
-	">",
-	"<<",
-	">>",
-	"|",
-	"OP",
-	"CP",
-	"&&",
-	"||",
-	"newline"
-};
-/*TEMP___START*/
-
-void	print_tree(t_node *node);
-
-void	ft_handle_parse_err()
+void	print_tokens(t_token *tokens)
 {
-	t_parse_err_type	type;
-	t_token_type		token_type;
+	t_token *tmp;
+	char *types[] = {"T_IDENTIFIER",
+		"<", ">", "<<", ">>", "|", "(", ")", "&&", "||", "newline"};
 
-	type = g_minishell.parse_err.type;
-	if (type)
+	tmp = tokens;
+	while (tmp)
 	{
-		// ft_clear_ast(); //TO HANDLE LATER
-		if (type == E_SYNTAX)
-		{
-			if (!g_minishell.curr_token)
-				token_type = T_NL;
-			else
-				token_type = g_minishell.curr_token->type;
-			ft_putstr_fd("msh: syntax error near unexpected token `", 2);
-			ft_putstr_fd(types[token_type], 2);
-			ft_putstr_fd("'\n", 2);
-		}
-		ft_bzero(&g_minishell.parse_err, sizeof(t_parse_err));
+		printf("%s ", types[tmp->type]);
+		tmp = tmp -> next;
 	}
+	printf("\n");
 }
+
 
 int	main()
 {
 	// printf("%s\n", BABOCHA_LOGO);
-	g_minishell.tokens = ft_tokenize();
-	if (!g_minishell.tokens)
-		return (1);
-	printf("Pass\n");
-	// print_token(g_minishell.tokens);
-	ft_clear_token_list(&g_minishell.tokens);
-	// if (g_minishell.tokens)
-	// g_minishell.tree = ft_parse();
-	// if (!g_minishell.tree)
-	// 	ft_handle_parse_err();
-	// print_tree(g_minishell.tree);
+	// while (1)
+	// {
+		g_minishell.tokens = ft_tokenize();
+		if (!g_minishell.tokens)
+			return 1;
+		g_minishell.ast = ft_parse();
+		ft_clear_token_list(&g_minishell.tokens);
+		if (g_minishell.parse_err.type)
+		{
+			printf(" i get inside\n");
+			ft_handle_parse_err();
+		}
+		ft_clear_ast(&g_minishell.ast);
+		// ft_clear_ast(&g_minishell.ast);// MAKE SURE THAT THIS FUNCTION IS RUN
+	// }
+	// print_ast(g_minishell.ast);
 }

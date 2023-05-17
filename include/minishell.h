@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:32:13 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 18:32:41 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:45:48 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_minishell
 {
 	t_token		*tokens;
 	t_token		*curr_token;
-	t_node		*tree;
+	t_node		*ast;
 	t_parse_err	parse_err;
 	t_node		*exit_status;
 }					t_minishell;

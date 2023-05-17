@@ -12,9 +12,13 @@ TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
 				tokenizing/tokenizer_handlers.c \
 				tokenizing/tokenizer.c \
 
-PARSING		:=	parsing/parser.c \
+PARSING		:=	parsing/parser_clear.c \
+				parsing/parser_err.c \
+				parsing/parser_helpers.c \
 				parsing/parser_nodes.c \
-				parsing/parser_err.c\
+				parsing/parser_utils.c \
+				parsing/parser.c \
+				parsing/.print_ast.c #for testing\
 				# parsing/clr_test.c
 
 SRCS		:=	$(TOKENIZING)\
