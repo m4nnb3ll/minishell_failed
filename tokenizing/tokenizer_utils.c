@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:41:48 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 19:08:02 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:41:58 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int	ft_is_quote(char c)
 	return (0);
 }
 
-int	ft_is_separator(char c)
+int	ft_is_separator(char *s)
 {
-	if (c == ' ' || c == '\t' || c == '<'
-		|| c == '>' || c == '|' || c == '&'
-		|| c == '(' || c == ')')
+	if (!ft_strncmp(s, "&&", 2) || *s == ' ' || *s == '\t'
+		|| *s == '<' || *s == '>' || *s == '|' || *s == '(' || *s == ')')
 		return (1);
 	return (0);
 }

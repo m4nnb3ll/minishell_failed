@@ -43,7 +43,7 @@ void	ft_recursive_clear_ast(t_node *node)
 	if (!node)
 		return ;
 	if (node -> type == N_CMD)
-		ft_clear_cmd_node((t_node *)node);
+		ft_clear_cmd_node(node);
 	else
 	{
 		if (node->left)

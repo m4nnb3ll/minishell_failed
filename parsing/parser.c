@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/17 01:31:09 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:58:11 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ t_node	*term(void)
 		return (get_simple_cmd());
 }
 
-t_node	*combine(t_token_type op, t_node *left, t_node *right)
-{
-	t_node	*node;
-
-	if (g_minishell.parse_err.type)
-		return (NULL);
-	node = ft_new_node(ft_get_node_type(op));
-	if (!node)
-		return (ft_set_parse_err(E_MEM), NULL);
-	node -> left = left;
-	node -> right = right;
-	return (node);
-}
-
 t_node	*expression(int min_prec)
 {
 	t_node			*left;
@@ -77,6 +63,20 @@ t_node	*expression(int min_prec)
 			return (ft_clear_ast(&left), ft_clear_ast(&right), NULL);
 	}
 	return (left);
+}
+
+t_node	*combine(t_token_type op, t_node *left, t_node *right)
+{
+	t_node	*node;
+
+	if (g_minishell.parse_err.type)
+		return (NULL);
+	node = ft_new_node(ft_get_node_type(op));
+	if (!node)
+		return (ft_set_parse_err(E_MEM), NULL);
+	node -> left = left;
+	node -> right = right;
+	return (node);
 }
 
 t_node	*ft_parse(void)

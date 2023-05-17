@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:45:29 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 18:53:55 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:41:27 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_append_identifier(char **line_ptr, t_token **token_list)
 
 	tmp_line = *line_ptr;
 	i = 0;
-	while (tmp_line[i] && !ft_is_separator(tmp_line[i]))
+	while (tmp_line[i] && !ft_is_separator(tmp_line + i))
 	{
 		if (ft_is_quote(tmp_line[i]))
 		{

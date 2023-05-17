@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 20:07:14 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/16 18:50:49 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:26:02 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_clear_token_list(t_token **lst);
 
 // tokenizer_utils.c
 int		ft_is_quote(char c);
-int		ft_is_separator(char c);
+int		ft_is_separator(char *s);
 void	ft_skip_spaces(char **line);
 bool	ft_skip_quotes(char *line, size_t *i);
 void	ft_print_quote_err(char c);
