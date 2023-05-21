@@ -6,14 +6,14 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 20:07:14 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/17 03:26:02 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:53:40 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZING_H
 # define TOKENIZING_H
 
-# define PROMPT "msh-1.0$ "
+# define PROMPT "minishell$ "
 
 typedef enum e_token_type
 {

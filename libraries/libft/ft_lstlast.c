@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/10/29 17:32:08 by oakerkao          #+#    #+#             */
+/*   Updated: 2022/10/30 11:12:18 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "libft.h"
 
-void	env(void)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_env	*list;
-
-	list = g_minishell.list;
-	while (list)
+	if (lst == NULL)
+		return (0);
+	while (lst -> next != NULL)
 	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
+		lst = lst -> next;
 	}
-}
+	return (lst);
+}	

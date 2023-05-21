@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/10/30 17:03:53 by oakerkao          #+#    #+#             */
+/*   Updated: 2022/10/31 10:20:40 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "libft.h"
 
-void	env(void)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_env	*list;
+	t_list	*p;
+	t_list	*l;
 
-	list = g_minishell.list;
-	while (list)
+	if (!lst)
+		return (NULL);
+	l = NULL;
+	while (lst)
 	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
+		p = ft_lstnew(f(lst->content));
+		ft_lstadd_back(&l, p);
+		if (!(p->content))
+		{
+			ft_lstclear(&l, del);
+		}
+		lst = lst->next;
 	}
+	return (l);
 }

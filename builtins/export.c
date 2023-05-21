@@ -6,11 +6,24 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:16:20 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/04/24 20:53:34 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:57:52 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+
+void	export_list()
+{
+	t_env	*list = g_minishell.list;
+	while (list)
+	{
+		if (list->value != NULL)
+			printf("declare -x %s=\"%s\"\n", list->key, list->value);
+		else
+			printf("declare -x %s\n", list->key);
+		list = list->next;
+	}
+}
 
 int	check_key(char *str)
 {
@@ -41,6 +54,11 @@ void	export(char **argv)
 	int		i;
 
 	i = 1;
+	if (!argv[i])
+	{
+		export_list();
+		return ;
+	}
 	while (argv[i])
 	{
 		if ((check_key(argv[i]) == 0) || get_node(get_key(argv[i])))

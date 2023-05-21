@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/11/10 09:46:21 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/04/07 00:47:10 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
+# include "libft.h"
 
-void	env(void)
-{
-	t_env	*list;
+char	*get_next_line(int fd);
+char	*str_dup(char *str);
+char	*str_save(char *str);
+char	*str_rem(char *str);
+char	*str_res(char *str1, char *str2);
+char	*read_check(int fd, char *result);
 
-	list = g_minishell.list;
-	while (list)
-	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
-	}
-}
+#endif

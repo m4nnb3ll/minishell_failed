@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/10/29 19:36:06 by oakerkao          #+#    #+#             */
+/*   Updated: 2022/10/30 15:09:22 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "libft.h"
 
-void	env(void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_env	*list;
+	t_list	*p;
 
-	list = g_minishell.list;
-	while (list)
+	if ((*lst) == NULL)
 	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
+		(*lst) = new;
+		return ;
 	}
+	p = *lst;
+	p = ft_lstlast(p);
+	p -> next = new;
 }

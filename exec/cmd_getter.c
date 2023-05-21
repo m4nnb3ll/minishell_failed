@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cmd_getter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2023/02/23 15:10:44 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/05/15 19:47:34 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "exec.h"
 
-void	env(void)
+char	**str_to_twod(char *str)
 {
-	t_env	*list;
+	int		i;
+	char	**arr;
 
-	list = g_minishell.list;
-	while (list)
-	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
-	}
+	i = 0;
+	arr = malloc(2 * sizeof(char *));
+	arr[i] = ft_strdup(str);
+	arr[++i] = NULL;
+	return (arr);
+}
+
+char	**cmd_getter(char *arg)
+{
+	char	**cmd;
+
+	cmd = NULL;
+	cmd = ft_split(arg, ' ');
+	return (cmd);
 }
