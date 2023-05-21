@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/10/29 12:55:06 by oakerkao          #+#    #+#             */
+/*   Updated: 2022/10/30 10:54:08 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "libft.h"
 
-void	env(void)
+int	ft_lstsize(t_list *lst)
 {
-	t_env	*list;
+	int		count;
+	t_list	*p;
 
-	list = g_minishell.list;
-	while (list)
+	count = 0;
+	p = lst;
+	while (p != NULL)
 	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
+		count++;
+		p = p -> next;
 	}
+	return (count);
 }

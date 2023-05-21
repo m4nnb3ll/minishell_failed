@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/10/30 15:10:08 by oakerkao          #+#    #+#             */
+/*   Updated: 2022/10/30 15:31:30 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "libft.h"
 
-void	env(void)
+void	ft_lstdelone(t_list	*lst, void (*del)(void *))
 {
-	t_env	*list;
+	t_list	*p;
 
-	list = g_minishell.list;
-	while (list)
-	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
-	}
+	if (lst == NULL)
+		return ;
+	p = lst;
+	p = p -> next;
+	del(lst -> content);
+	free(lst);
 }

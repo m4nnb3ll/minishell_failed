@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2023/05/18 11:22:19 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/05/21 17:22:06 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+# include "exec.h"
 
-void	env(void)
+void	error_msg(char *file, char *err_msg, int exit_code)
 {
-	t_env	*list;
+	char	*final;
 
-	list = g_minishell.list;
-	while (list)
+	final = ft_strjoin("minishell", ": ");
+	final = ft_strjoin(final, file);
+	final = ft_strjoin(final, ": ");
+	final = ft_strjoin(final, err_msg);
+	if (final)
 	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
+		ft_putstr_fd(final, 2);
+		ft_putstr_fd("\n", 2);
 	}
+	if (exit_code == 127)
+		g_minishell.exit_s = 127;
+	else if (exit_code == 1)
+		g_minishell.exit_s = 1;
+
 }

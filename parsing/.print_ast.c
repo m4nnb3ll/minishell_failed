@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   .print_ast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:08:43 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/17 00:29:38 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:29:20 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	recursive_print_ast(t_node *node)
 	if (node -> type == N_CMD)
 	{
 		printf("%s ", node->args);
-		printf("7BESS!!!\n");
+		//printf("7BESS!!!\n");
 		ft_print_io_list(node->io_list);
 	}
 	else

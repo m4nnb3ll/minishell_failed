@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2022/10/20 12:50:59 by oakerkao          #+#    #+#             */
+/*   Updated: 2022/10/30 10:45:03 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "libft.h"
 
-void	env(void)
+t_list	*ft_lstnew(void	*content)
 {
-	t_env	*list;
+	t_list	*head;
 
-	list = g_minishell.list;
-	while (list)
-	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
-	}
+	head = (t_list *)malloc(sizeof(t_list));
+	if (!head)
+		return (0);
+	head -> content = content;
+	head -> next = NULL;
+	return (head);
 }

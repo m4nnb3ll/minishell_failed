@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:32:25 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/04/24 11:37:43 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:59:44 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_value(char *str)
 	char	*new;
 
 	if (ft_strchr(str, '=') == NULL)
-		len = ft_strlen(str) + 1;
+		return (0);
 	else
 	{
 		str = ft_strchr(str, '=');

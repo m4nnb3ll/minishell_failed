@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 09:29:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:54 by oakerkao         ###   ########.fr       */
+/*   Created: 2023/04/24 13:00:21 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/05/16 18:33:19 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+# ifndef BUILTIN_H
+# define BUILTIN_H
 
-void	env(void)
-{
-	t_env	*list;
+# include <string.h>
+# include "minishell.h"
 
-	list = g_minishell.list;
-	while (list)
-	{
-		if (list->value != NULL)
-			printf("%s=%s\n", list->key, list->value);	
-		list = list->next;
-	}
-}
+void	unset(char **args);
+void	echo(char **cmd);
+void	export(char **argv);
+void	env(void);
+void	pwd(void);
+void	cd(char *path);
+void	ft_exit(char **args);
+
+/* utils */
+int		check_key(char *str);
+
+# endif
