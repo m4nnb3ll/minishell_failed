@@ -72,7 +72,7 @@ $(LIBFT):
 	@echo "libft done."
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline
+	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline -fsanitize=address
 	echo "done"
 
 clean:

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:19 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 17:22:06 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:25:54 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+# include "minishell.h"
 
 void	error_msg(char *file, char *err_msg, int exit_code)
 {

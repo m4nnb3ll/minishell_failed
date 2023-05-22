@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:40:53 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 15:56:37 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:26:42 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+# include "minishell.h"
 
 void	traverse_tree(t_node *tree, t_context *ctx)
 {
