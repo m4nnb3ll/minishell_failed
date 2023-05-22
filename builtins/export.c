@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:16:20 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/19 15:57:52 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 20:55:15 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	check_key(char *str)
 	if ((str[0] < 'a' || str[0] > 'z') && (str[0] < 'A' || str[0] > 'Z') \
 			&& str[0] != '_')
 	{
-		printf("error\n");
 		return (0);
 	}
 	while (str[i] && str[i] != '=')
@@ -41,7 +40,6 @@ int	check_key(char *str)
 		if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') && \
 				(str[i] < '0' || str[i] > '9') && (str[i] != '_'))
 		{
-			printf("error\n");
 			return (0);
 		}
 		i++;
@@ -63,7 +61,6 @@ void	export(char **argv)
 	{
 		if ((check_key(argv[i]) == 0) || get_node(get_key(argv[i])))
 		{
-			printf("error\n");
 			return ;
 		}
 		else

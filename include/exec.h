@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:09:16 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 19:39:01 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:45:02 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/wait.h>
 # include <stdio.h>
 
-
 typedef struct	s_fd
 {
 	int			content;
@@ -28,7 +27,7 @@ typedef struct	s_fd
 
 typedef	struct	s_context
 {
-	int	fd[2];
+	int		fd[2];
 	t_fd	*fd_close;
 	t_fd	*here_doc;
 } t_context;
@@ -51,7 +50,7 @@ int		exec_and(t_node *tree, t_context *ctx);
 int		exec_or(t_node *tree, t_context *ctx);
 int		exec_left(t_node *node, int fd[2]);
 int		exec_right(t_node *node, int fd[2]);
-int	check_redirection(t_io_node *io, t_context *ctx);
+int		check_redirection(t_io_node *io, t_context *ctx);
 
 // redirect
 int	out(char *file, t_context *ctx);

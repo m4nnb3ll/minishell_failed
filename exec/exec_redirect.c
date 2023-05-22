@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:32:29 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 19:39:30 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:40:37 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ int	here_doc(char *delimiter, t_context *ctx)
 	pipe(p);
 	while (1)
 	{
-		red = readline("> ");	
+		red = readline("> ");
+		if (!red)
+		{
+			printf("EOF\n");
+			break ;
+		}
 		if (ft_strcmp(red, delimiter) == 0)
 			break ;
 		ft_putstr_fd(red, p[1]);

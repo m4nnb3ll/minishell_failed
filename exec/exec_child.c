@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:13:52 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 19:01:02 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:02:17 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	check_redirection(t_io_node *io, t_context *ctx)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (io)
 	{
 		if (io->type == IO_OUT)
