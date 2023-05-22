@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:09:16 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 21:24:53 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:38:32 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 // char	**twod_split(char *str, char c);
 // char	*ft_strjoin_o(int size, ...);
 // t_list	*ft_split_o(char *str, char c);
-
 // //functions
 
 // void	exec();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:16:20 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 18:03:46 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:41:49 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	export(char **argv)
 			tmp = get_node(get_key(argv[i]));
 			if (get_value(argv[i]))
 				tmp->value = get_value(argv[i]);
+			return ;
 		}
 		else
 			add_node(new_node(get_key(argv[i]), get_value(argv[i])));

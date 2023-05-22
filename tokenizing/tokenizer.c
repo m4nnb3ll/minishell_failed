@@ -3,27 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:52:56 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/18 11:14:50 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:42:06 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_token	*ft_tokenize(void)
+{
+	char	*line;
+	t_token	*token_list;
+	
+	// if (isatty(0))
+	// 	line = readline(PROMPT);
+	// else
+	// 	line = get_next_line(0);
+	line = g_minishell.line;
+	token_list = ft_tokenization_handler(line);
+	add_history(line);
+	return (free(line), token_list);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// GET_NEXT_LINE BELOW
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 char	*str_res(char *str1, char *str2);
-
 char	*str_rem(char *str);
-
 char	*str_save(char	*str);
-
 char	*str_dup(char *str);
 char	*read_check(int fd, char *result);
-
 char	*get_next_line(int fd);
-
-
 char	*str_res(char *str1, char *str2)
 {
 	char	*res_str;
@@ -169,20 +211,4 @@ char	*get_next_line(int fd)
 	final = str_rem(result);
 	result = str_save(result);
 	return (final);
-}
-
-t_token	*ft_tokenize(void)
-{
-	char	*line;
-	t_token	*token_list;
-	
-	if (isatty(0))
-		line = readline(PROMPT);
-	else
-		line = get_next_line(0);
-	if (!line)
-		return (NULL);
-	token_list = ft_tokenization_handler(line);
-	add_history(line);
-	return (free(line), token_list);
 }

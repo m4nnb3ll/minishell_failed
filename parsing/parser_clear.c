@@ -58,4 +58,5 @@ void	ft_clear_ast(t_node **ast)
 {
 	ft_recursive_clear_ast(*ast);
 	*ast = NULL;
+	ft_clear_token_list(&g_minishell.tokens);
 }
