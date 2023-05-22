@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:50:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/22 12:24:38 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:32:50 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_handle_parse_err(void)
 			ft_putstr_fd("msh: syntax error near unexpected token `", 2);
 			ft_putstr_fd(types[token_type], 2);
 			ft_putstr_fd("'\n", 2);
+			g_minishell.exit_s = 258;
 		}
 		ft_bzero(&g_minishell.parse_err, sizeof(t_parse_err));
 	}

@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:28:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/22 19:37:41 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:49:43 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_init_signals()
 
 int main(int argc, char *argv[], char *env[])
 {
+	get_env_list(env);
 	g_minishell.exit_s = 0;
 	ft_init_signals();
 	while (1)
@@ -59,7 +60,7 @@ int main(int argc, char *argv[], char *env[])
 		g_minishell.ast = ft_parse();
 		if (g_minishell.parse_err.type)
 			ft_handle_parse_err();
-		// exec();
+		exec();
 		ft_clear_ast(&g_minishell.ast);
 	}
 }

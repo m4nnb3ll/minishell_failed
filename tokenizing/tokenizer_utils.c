@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:41:48 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/17 03:41:58 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:32:38 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	ft_print_quote_err(char c)
 	ft_putstr_fd("msh: unexpected `newline' while looking for matching `", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd("'\n", 2);
+	g_minishell.exit_s = 258;
 }
