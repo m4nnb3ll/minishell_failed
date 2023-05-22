@@ -6,12 +6,11 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:04:00 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 10:22:24 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:01:38 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
