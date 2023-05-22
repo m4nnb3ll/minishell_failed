@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_getter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:10:44 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/15 19:47:34 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:25:47 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 char	**str_to_twod(char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:07:56 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 16:20:17 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:11:52 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+# include "minishell.h"
 
 // T_CMD
 // T_AND
@@ -21,15 +21,18 @@
 void	exec()
 {
 	t_node	*tree;
-	int	status;
+	t_exec	exec;
 	int	child;
 	t_context	ctx;
 	t_node	*tmp;
+	int	status;
 	int	i = 0;
 
+	exec_init();
 	ctx.fd[0] = 0;
 	ctx.fd[1] = 1;
 	g_minishell.index = 0;
+	g_minishell.in_pipe = 0;
 	ctx.fd_close = NULL;
 	ctx.here_doc = NULL;
 	tree = g_minishell.ast;
@@ -39,13 +42,11 @@ void	exec()
 	close_parent_here_doc(&ctx);
 	while (i < child)
 	{
-		wait(NULL);
+		wait(&status);
 		i++;
 	}
 	if (WIFEXITED(status))
 		g_minishell.exit_s = WEXITSTATUS(status);
-	//printf("%d\n", g_minishell.exit_s);
-	//exit(g_minishell.exit_s);
 }
 
 int	exec_node(t_node *tree, t_context *ctx)

@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:04:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 18:08:11 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:48:55 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ char	*get_var(char *str)
 	char *result;
 
 	i = 0;
-	while (str[i] != '\'' && str[i] != '"' && str[i] != ' ' && str[i] != '$' && str[i])
+	if (!str)
+		return (0);
+	if (str[0])
+		i++;
+	while (str[i] != '\'' && str[i] != '"' && str[i] != ' ' && str[i] != '$' && str[i] != '=' && str[i])
 		i++;
 	result = malloc(i + 1);
 	ft_strlcpy(result, str, i + 1);
@@ -85,96 +89,79 @@ char	*char_join(char *str, char c)
 	return (result);
 }
 
-int	check_value(t_list **lst, char *str, int i, t_list **tmp)
+void	join_value(t_expand *expand, char **splited)
+{
+	if (!expand->tmp->content)
+	{
+		if (*splited)
+			expand->tmp->content = ft_strdup(*splited);
+	}
+	else
+		expand->tmp->content = ft_strjoin(expand->tmp->content, *splited);
+	splited++;
+	while (splited && *splited)
+	{
+		ft_lstadd_back(&expand->lst, ft_lstnew(*splited));
+		expand->tmp = expand->tmp->next;
+		splited++;	
+	}
+}
+
+int	check_value(t_expand *expand, char *str)
 {
 	char	**splited;
 	char	*temp;
 	t_env	*node;
-	int	j;
-	int	k;
 
-	j = 1;
-	k = 0;
 	temp = get_var(str + 1);
-	i = 0;
-	i += ft_strlen(temp);
+	if (temp[0] == '\0' && str[0] == '$')
+	{	
+		if (!expand->tmp->content)
+			expand->tmp->content = ft_strdup("$");
+		else
+			expand->tmp->content = ft_strjoin(expand->tmp->content, "$");
+	}
+	else if (str[1] == '?')
+	{
+		if (!expand->tmp->content)
+			expand->tmp->content = ft_strdup(ft_itoa(g_minishell.exit_s));
+		else
+			expand->tmp->content = ft_strjoin(expand->tmp->content, ft_itoa(g_minishell.exit_s));
+	}
 	if (get_node(temp))
 	{
 		node = get_node(temp);
 		splited = ft_split(node->value, ' ');
-		if ((*tmp)->content == NULL)
-			(*tmp)->content = ft_strdup(splited[0]);
-		else
-			(*tmp)->content = ft_strjoin((*tmp)->content, splited[0]);
-		while (splited && splited[j])
-		{
-			ft_lstadd_back(lst, ft_lstnew(splited[j]));
-			(*tmp) = (*tmp)->next;
-			j++;
-		}
+		join_value(expand, splited);
 	}
-	else if (ft_strcmp(str + 1, "?") == 0)
-	{
-		if ((*tmp)->content == NULL)
-			(*tmp)->content = ft_strdup(ft_itoa(g_minishell.exit_s));
-		else
-			(*tmp)->content = ft_strjoin((*tmp)->content, ft_itoa(g_minishell.exit_s));
-	}
-	else if (ft_strcmp(str, "$") == 0)
-		(*tmp)->content = char_join((*tmp)->content, '$');
-	return (i);
+	return (ft_strlen(temp));
 }
 
 char	**expander(char *str)
 {
-	char	quotes;
-	int		i;
-	t_list	*lst;
-	t_list	*tmp;
-	char	**splited;
+	t_expand	expand;
 
-	i = 0;
-	quotes = 0;
-	lst = NULL;
-	tmp = NULL;
-	splited = NULL;
-	ft_lstadd_back(&lst, ft_lstnew(NULL));
-	tmp = lst;
-	while (str && str[i])
+	expand.i = 0;
+	expand.quotes = 0;
+	expand.lst = NULL;
+	ft_lstadd_back(&expand.lst, ft_lstnew(NULL));
+	expand.tmp = expand.lst;
+	while (str && str[expand.i])
 	{
-		if ((str[i] == '"' || str[i] == '\'') && quotes == 0)	
-			quotes = str[i];
-		else if (str[i] == quotes)
-			quotes = 0;
-		else if (str[i] == '$' && quotes != '\'')
+		if ((str[expand.i] == '"' || str[expand.i] == '\'') && expand.quotes == 0)	
+			expand.quotes = str[expand.i];
+		else if (str[expand.i] == expand.quotes)
+			expand.quotes = 0;
+		else if (str[expand.i] == '$' && expand.quotes != '\'')
+			expand.i += check_value(&expand, str + expand.i);
+		else if (expand.quotes || str[expand.i] != ' ')
+			expand.tmp->content = char_join(expand.tmp->content, str[expand.i]);
+		else if (str[expand.i] == ' ' && !expand.quotes)
 		{
-			i += check_value(&lst, str + i, i, &tmp);
+			ft_lstadd_back(&expand.lst, ft_lstnew(NULL));
+			expand.tmp = expand.tmp->next;
 		}
-		else if (quotes || str[i] != ' ')
-			tmp->content = char_join(tmp->content, str[i]);
-		else if (str[i] == ' ' && !quotes)
-		{
-			ft_lstadd_back(&lst, ft_lstnew(NULL));
-			tmp = tmp->next;
-		}
-		i++;
+		expand.i++;
 	}
-	/*while (lst)
-	{
-		if (lst->content)
-			printf("%s\n", lst->content);
-		lst = lst->next;	
-	}*/
-	splited = put_twod_array(lst);
-	return (splited);
+	return (put_twod_array(expand.lst));
 }
-
-/*int main(int argc, char *argv[])
-{
-	char **arr = expander(argv[1]);
-	while (arr && *arr)
-	{
-		printf("%s\n", *arr);	
-		arr++;
-	}
-}*/

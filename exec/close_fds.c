@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   close_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 12:54:18 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 16:07:20 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:25:39 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+# include "minishell.h"
 
 void	close_child_fds(t_context *ctx)
 {

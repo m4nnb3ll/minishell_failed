@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:32:29 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 21:40:37 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:39:36 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+# include "minishell.h"
 
 int	out(char *file, t_context *ctx)
 {
