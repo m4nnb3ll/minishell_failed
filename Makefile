@@ -4,6 +4,7 @@ LIBFT		:= libft.a
 LIBFT_PATH	:= "libraries/libft"
 
 CC			:= cc
+
 CFLAGS		:= -Wall -Werror -Wextra -g
 
 TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
@@ -71,7 +72,7 @@ $(LIBFT):
 	@echo "libft done."
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline #-fsanitize=address
+	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline
 	echo "done"
 
 clean:
