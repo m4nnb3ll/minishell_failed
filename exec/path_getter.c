@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_getter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:13:45 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:03:51 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:45:08 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*check_cmd(char *cmd, char *path)
 	int		i;
 	char	**splited_path;
 	char	*result;
-	char	*err_msg;
+	// char	*err_msg;
 
 	i = 0;
 	splited_path = ft_split(path, ':');
@@ -66,7 +66,7 @@ char	*path_getter(char *cmd)
 {
 	char	*cmd_path;
 	t_env	*tmp;
-	char	*env;
+	// char	*env;
 	int	exist;
 
 	if (!cmd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:07:56 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:11:52 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:44:45 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 void	exec()
 {
 	t_node	*tree;
-	t_exec	exec;
+	// t_exec	exec;
 	int	child;
 	t_context	ctx;
 	t_node	*tmp;

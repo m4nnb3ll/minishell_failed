@@ -6,25 +6,17 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:16:20 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:41:49 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:05:29 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	export_error_msg(char *file)
+void	export_error_msg(char *identifier)
 {
-	char	*result;
-
-	result = ft_strdup("minishell");
-	result = ft_strjoin(result, ": ");
-	result = ft_strjoin(result, "export: ");
-	result = ft_strjoin(result, "`");
-	result = ft_strjoin(result, file);
-	result = ft_strjoin(result, "'");
-	result = ft_strjoin(result, ": ");
-	result = ft_strjoin(result, "not a valid identifier\n");
-	ft_putstr_fd(result, 1);
+	ft_putstr_fd("minishell: export: `", 1);
+	ft_putstr_fd(identifier, 1);
+	ft_putstr_fd("': not a valid identifier\n", 1);
 }
 
 void	export_list()

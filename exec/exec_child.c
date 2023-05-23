@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:13:52 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:40:06 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:45:49 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	check_redirection(t_io_node *io, t_context *ctx)
 
 int	exec_child(t_node *tree, t_context *ctx)
 {
-	int	status;
+	// int	status;
 	int	redirect;
 	int	pid;
 
@@ -129,7 +129,7 @@ int	exec_child(t_node *tree, t_context *ctx)
 		{
 			//exit_child();
 			//exit the true exit status even if it doesn't affect the parent 
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 	}
 	return (1);

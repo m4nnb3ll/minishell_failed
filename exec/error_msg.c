@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:19 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 21:25:54 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:06:34 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	error_msg(char *file, char *err_msg, int exit_code)
 {
 	char	*final;
 
+// CHECK HERE
 	final = ft_strjoin("minishell", ": ");
 	final = ft_strjoin(final, file);
 	final = ft_strjoin(final, ": ");

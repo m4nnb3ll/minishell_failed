@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:32:13 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/22 19:37:29 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:43:57 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <stdbool.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include "libft.h"
 # include "tokenizing.h"
 # include "parsing.h"
@@ -26,6 +27,8 @@
 # include "expander.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include <signal.h>
+# include <sys/wait.h>
 
 /*TEMP___START*/
 extern char			*types[];
