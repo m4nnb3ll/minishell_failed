@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:13:52 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:40:06 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:41:52 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	check_redirection(t_io_node *io, t_context *ctx)
 
 int	exec_child(t_node *tree, t_context *ctx)
 {
-	int	status;
 	int	redirect;
 	int	pid;
 
@@ -108,6 +107,8 @@ int	exec_child(t_node *tree, t_context *ctx)
 	{
 		if (is_builtin_child() == 1)
 		{
+			//free(g_minishell.exec.path);
+			//free_twod_array(g_minishell.exec.args);
 			exec_builtin_child();
 			return (0);
 		}
@@ -121,16 +122,26 @@ int	exec_child(t_node *tree, t_context *ctx)
 		if (is_builtin_child() == 1)
 		{
 			exec_builtin_child();
+			//free(g_minishell.exec.path);
+			//free_twod_array(g_minishell.exec.args);
 			exit(0);
 		}
 		if (redirect == 0)
-			exit(1);
-		if (execve(g_minishell.exec.path, g_minishell.exec.args, NULL) == -1)
 		{
-			//exit_child();
-			//exit the true exit status even if it doesn't affect the parent 
+			//free(g_minishell.exec.path);
+			//free_twod_array(g_minishell.exec.args);
 			exit(1);
 		}
+		if (execve(g_minishell.exec.path, g_minishell.exec.args, NULL) == -1)
+		{
+			free_twod_array(g_minishell.exec.args);
+			free(g_minishell.exec.path);
+			//exit_child();
+			//exit the true exit status even if it doesn't affect the parent 
+			exit(EXIT_FAILURE);
+		}
 	}
+	//free_twod_array(g_minishell.exec.args);
+	//free(g_minishell.exec.path);
 	return (1);
 }

@@ -12,7 +12,7 @@
 
 #include "builtin.h"
 
-void	change_pwd(char *path)
+void	change_pwd(void)
 {
 	t_env	*current;
 	char	*str;
@@ -56,5 +56,5 @@ void	cd(char *path)
 		return ;
 	}
 	change_old_pwd();
-	change_pwd(path);
+	change_pwd();
 }

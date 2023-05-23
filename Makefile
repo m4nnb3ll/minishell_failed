@@ -3,8 +3,8 @@ NAME		:= minishell
 LIBFT		:= libft.a
 LIBFT_PATH	:= "libraries/libft"
 
-CC			:= cc
-CFLAGS		:= #-fsanitize=address -g #-Wall -Werror -Wextra -g
+CC		:= gcc
+CFLAGS		:= -Wall -Werror -Wextra -g
 
 TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
 				tokenizing/tokenizer_lst.c \
@@ -27,7 +27,8 @@ ENV			:=	env/add_node.c \
 				env/new_node.c \
 				env/get_value.c \
 				env/get_key.c \
-				env/change_value.c
+				env/change_value.c \
+				env/env_clear.c
 
 EXEC		:=	exec/exec.c \
 				exec/path_getter.c \
@@ -72,7 +73,7 @@ $(LIBFT):
 	@echo "libft done."
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline -fsanitize=address
+	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline #-fsanitize=address
 	echo "done"
 
 clean:

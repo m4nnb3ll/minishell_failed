@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env_list.c                                     :+:      :+:    :+:   */
+/*   env_clear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 11:42:26 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/17 16:12:29 by oakerkao         ###   ########.fr       */
+/*   Created: 2023/05/23 10:34:40 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/05/23 10:37:51 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+# include "env.h"
 
-void	get_env_list(char **enviro)
+void	env_clear(t_env **env)
 {
-	int		i;
+	t_env	*lst;
 
-	i = 0;
-	g_minishell.list = NULL;
-	while (enviro[i])
+	lst = *env;
+	if (*env == NULL)
+		return ;
+	while (lst)
 	{
-		add_node(new_node(get_key(enviro[i]), get_value(enviro[i])));
-		i++;	
+		lst = (*env)->next;
+		free((*env)->key);
+		free((*env)->value);
+		free(*env);
+		*env = lst;
 	}
 }

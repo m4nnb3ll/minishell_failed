@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:13:45 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:03:51 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:30:09 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,21 @@ char	*check_cmd(char *cmd, char *path)
 	int		i;
 	char	**splited_path;
 	char	*result;
-	char	*err_msg;
+	char	*to_free;
 
 	i = 0;
 	splited_path = ft_split(path, ':');
 	while (splited_path && splited_path[i])
 	{
-		result = ft_strjoin(splited_path[i], "/");
-		result = ft_strjoin(result, cmd);
+		to_free = ft_strjoin(splited_path[i], "/");
+		result = ft_strjoin(to_free, cmd);
+		//free(to_free);
 		if (access(result, F_OK) == 0)
 		{
+			//free_twod_array(splited_path);
 			if (access(result, X_OK) == 1)
 			{
+				//free(result);
 				error_msg(cmd, "permission denied", 126);
 				return (0);	
 			}
@@ -36,6 +39,8 @@ char	*check_cmd(char *cmd, char *path)
 		}
 		i++;
 	}
+	// free_twod_array(splited_path);
+	// free(result);
 	return (0);
 }
 
@@ -64,9 +69,8 @@ char	*check_path(char *cmd, char *env)
 
 char	*path_getter(char *cmd)
 {
-	char	*cmd_path;
+	char	*path;
 	t_env	*tmp;
-	char	*env;
 	int	exist;
 
 	if (!cmd)
@@ -79,8 +83,11 @@ char	*path_getter(char *cmd)
 	tmp = get_node("PATH");
 	if (!tmp)
 		return (0);
-	cmd_path = check_path(cmd, tmp->value);
 	if (!cmd)
+	{
 		error_msg(g_minishell.exec.args[0], "command not found", 127);
-	return (cmd_path);
+		return (0);
+	}
+	path = check_path(cmd, tmp->value);
+	return (path);
 }
