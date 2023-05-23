@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:56:37 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/18 11:47:17 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:02:04 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	remove_node(char *key)
 	current = g_minishell.list;
 	while (current)
 	{
-		if (strcmp(current->key, key) == 0)
+		if (ft_strcmp(current->key, key) == 0)
 		{
 			if (prev)
 				prev->next = current->next;

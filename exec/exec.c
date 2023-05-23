@@ -6,11 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:07:56 by oakerkao          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 10:33:41 by oakerkao         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/23 14:44:45 by abelayad         ###   ########.fr       */
->>>>>>> upstream/main
+/*   Updated: 2023/05/23 15:58:40 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +20,6 @@
 void	exec()
 {
 	t_node	*tree;
-<<<<<<< HEAD
-=======
-	// t_exec	exec;
-	int	child;
-	t_context	ctx;
->>>>>>> upstream/main
 	t_node	*tmp;
 	t_context	ctx;
 	t_wait		wait_var;

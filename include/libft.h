@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:00:05 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/23 16:03:55 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:08:46 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdint.h>
 // My functions headers below
-// # include "get_next_line.h"
 
 typedef struct s_list
 {
