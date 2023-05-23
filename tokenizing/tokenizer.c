@@ -6,11 +6,12 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:52:56 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/22 10:42:06 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:56:13 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#define BUFFER_SIZE 10
 
 t_token	*ft_tokenize(void)
 {
@@ -31,22 +32,7 @@ t_token	*ft_tokenize(void)
 
 
 
-
-
-
-
-
-
-
-
-
-
 // GET_NEXT_LINE BELOW
-
-
-
-
-
 
 
 

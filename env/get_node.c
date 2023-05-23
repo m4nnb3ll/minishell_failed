@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:31:27 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/17 16:12:42 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:57:01 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_env	*get_node(char *key)
 	list = g_minishell.list;
 	while (list)
 	{
-		if (strcmp(key, list->key) == 0)
+		if (ft_strcmp(key, list->key) == 0)
 			return (list);
 		list = list->next;
 	}
