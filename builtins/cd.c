@@ -6,11 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 12:19:12 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 16:01:50 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:31:47 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 void	change_pwd(void)
 {
@@ -22,7 +22,7 @@ void	change_pwd(void)
 	current->value = str;
 }
 
-void	change_old_pwd()
+void	change_old_pwd(void)
 {
 	t_env	*old;
 	t_env	*current;
@@ -32,7 +32,7 @@ void	change_old_pwd()
 	old->value = current->value;
 }
 
-void	change_to_home()
+void	change_to_home(void)
 {
 	t_env	*home;
 	t_env	*current;

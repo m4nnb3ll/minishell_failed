@@ -34,6 +34,7 @@ EXEC		:=	exec/exec.c \
 				exec/cmd_getter.c \
 				exec/exec_redirect.c \
 				exec/exec_pipe.c \
+				exec/exec_child_utils.c \
 				exec/exec_child.c\
 				exec/error_msg.c\
 				exec/exit_status.c\
@@ -47,9 +48,11 @@ BUILTINS	:=	builtins/echo.c \
 				builtins/pwd.c \
 				builtins/export.c \
 				builtins/unset.c \
-				builtins/env.c
+				builtins/env.c \
+				builtins/utils.c
 
-EXPANDER	:= expander/expander.c
+EXPANDER	:=	expander/expander.c \
+				expander/expander_utils.c
 
 
 SRCS		:=	$(TOKENIZING)\
@@ -62,8 +65,10 @@ SRCS		:=	$(TOKENIZING)\
 
 OBJS		:= $(SRCS:.c=.o)
 
+READLINE_PATH:=	/goinfre/abelayad/homebrew/opt/readline
+
 %.o: %.c
-	@$(CC) -g $(CFLAGS) -c $< -Iinclude -o $@
+	@$(CC) -g $(CFLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
 
 all: $(NAME)
 
@@ -71,8 +76,9 @@ $(LIBFT):
 	@make -C $(LIBFT_PATH)
 	@echo "libft done."
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline
+
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline
 	echo "done"
 
 clean:

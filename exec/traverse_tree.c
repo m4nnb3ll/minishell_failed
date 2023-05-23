@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:40:53 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/21 21:26:42 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:09:29 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	traverse_tree(t_node *tree, t_context *ctx)
 {
@@ -20,34 +20,27 @@ void	traverse_tree(t_node *tree, t_context *ctx)
 		traverse_pipe(tree, ctx);
 	else if (tree->type == N_CMD)
 		traverse_child(tree, ctx);
-	/*else if (tree->type == N_OR)
-		traverse_or(tree, ctx);
-	else if (tree->type == N_AND)
-		traverse_and(tree, ctx);
-	else
-		printf("nerror\n");*/
 }
 
 void	traverse_pipe(t_node *tree, t_context *ctx)
 {
-	//left_node
 	traverse_tree(tree->left, ctx);
-	
-	// right_node
 	traverse_tree(tree->right, ctx);
 }
 
 void	traverse_child(t_node *tree, t_context *ctx)
 {
-	int	i;
-	t_io_node	*io = tree->io_list;
+	int			i;
+	t_io_node	*io;
+
+	io = tree->io_list;
 	while (io)
 	{
 		if (io->type == IO_HEREDOC)
 			i = here_doc(io->value, ctx);
 		if (i == 0)
 			break ;
-		io = io->next;	
+		io = io->next;
 	}
 }
 

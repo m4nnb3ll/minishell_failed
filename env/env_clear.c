@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_clear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:34:40 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 10:37:51 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:37:53 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "env.h"
+#include "minishell.h"
 
 void	env_clear(t_env **env)
 {

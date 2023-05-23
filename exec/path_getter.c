@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:13:45 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 15:59:44 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:18:29 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,14 @@ char	*check_cmd(char *cmd, char *path)
 	{
 		to_free = ft_strjoin(splited_path[i], "/");
 		result = ft_strjoin(to_free, cmd);
-		//free(to_free);
 		if (access(result, F_OK) == 0)
 		{
-			//free_twod_array(splited_path);
 			if (access(result, X_OK) == 1)
-			{
-				//free(result);
-				error_msg(cmd, "permission denied", 126);
-				return (0);	
-			}
+				return (error_msg(cmd, "permission denied", 126), NULL);
 			return (result);
 		}
 		i++;
 	}
-	// free_twod_array(splited_path);
-	// free(result);
 	return (0);
 }
 
@@ -71,7 +63,7 @@ char	*path_getter(char *cmd)
 {
 	char	*path;
 	t_env	*tmp;
-	int	exist;
+	int		exist;
 
 	if (!cmd)
 		return (0);

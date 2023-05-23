@@ -6,21 +6,21 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:07:56 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 15:58:40 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:52:20 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 // T_CMD
 // T_AND
 // T_OR
 // T_PIPE
 
-void	exec()
+void	exec(void)
 {
-	t_node	*tree;
-	t_node	*tmp;
+	t_node		*tree;
+	t_node		*tmp;
 	t_context	ctx;
 	t_wait		wait_var;
 
@@ -47,7 +47,7 @@ int	exec_node(t_node *tree, t_context *ctx)
 		return (exec_pipe(tree, ctx));
 	else if (tree->type == N_CMD)
 		return (exec_child(tree, ctx));
-	else if (tree->type == N_OR) 
+	else if (tree->type == N_OR)
 		return (exec_or(tree, ctx));
 	else if (tree->type == N_AND)
 		return (exec_and(tree, ctx));

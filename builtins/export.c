@@ -6,11 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:16:20 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 12:05:29 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:31:50 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 void	export_error_msg(char *identifier)
 {
@@ -19,9 +19,11 @@ void	export_error_msg(char *identifier)
 	ft_putstr_fd("': not a valid identifier\n", 1);
 }
 
-void	export_list()
+void	export_list(void)
 {
-	t_env	*list = g_minishell.list;
+	t_env	*list;
+
+	list = g_minishell.list;
 	while (list)
 	{
 		if (list->value != NULL)
@@ -54,6 +56,7 @@ void	export(char **argv)
 {
 	int		i;
 	t_env	*tmp;
+
 	i = 1;
 	if (!argv[i])
 	{

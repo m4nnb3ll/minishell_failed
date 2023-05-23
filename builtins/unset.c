@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:56:37 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 16:02:04 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:31:51 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 void	remove_node(char *key)
 {
@@ -44,7 +44,7 @@ void	unset(char **args)
 		return ;
 	while (args[i])
 	{
-		if(check_key(args[i]) == 0)
+		if (check_key(args[i]) == 0)
 		{
 			printf("here\n");
 			return ;

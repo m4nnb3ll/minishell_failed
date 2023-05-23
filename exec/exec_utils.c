@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 16:59:15 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 10:53:20 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:07:10 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	exec_init(t_context *ctx, t_wait *wait_var)
 {
@@ -61,7 +61,7 @@ void	free_twod_array(char **arr)
 	i = 0;
 	while (arr && arr[i])
 	{
-		free(arr[i]);	
+		free(arr[i]);
 		i++;
 	}
 	free(arr);

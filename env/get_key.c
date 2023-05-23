@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:47:28 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/04/24 11:35:41 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:37:58 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "minishell.h"
 
 char	*get_key(char *str)
 {
@@ -21,7 +21,7 @@ char	*get_key(char *str)
 		len = ft_strlen(str) + 1;
 	else
 	{
-		new = ft_strchr(str, '=');	
+		new = ft_strchr(str, '=');
 		len = new - str + 1;
 	}
 	new = malloc(len * sizeof(char));

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:32:29 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 19:39:36 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:06:49 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 int	out(char *file, t_context *ctx)
 {
@@ -52,7 +52,7 @@ int	in(char *file, t_context *ctx)
 
 int	append(char *file, t_context *ctx)
 {
-	int	fd;
+	int		fd;
 	char	**expanded;
 
 	expanded = expander(file);
