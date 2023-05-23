@@ -3,7 +3,11 @@ NAME		:= minishell
 LIBFT		:= libft.a
 LIBFT_PATH	:= "libraries/libft"
 
+<<<<<<< HEAD
 CC		:= gcc
+=======
+CC			:= cc
+>>>>>>> upstream/main
 CFLAGS		:= -Wall -Werror -Wextra -g
 
 TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
@@ -18,8 +22,6 @@ PARSING		:=	parsing/parser_clear.c \
 				parsing/parser_nodes.c \
 				parsing/parser_utils.c \
 				parsing/parser.c \
-				parsing/.print_ast.c #for testing\
-				# parsing/clr_test.c
 
 ENV			:=	env/add_node.c \
 				env/get_env_list.c \
@@ -73,7 +75,11 @@ $(LIBFT):
 	@echo "libft done."
 
 $(NAME): $(OBJS) $(LIBFT)
+<<<<<<< HEAD
 	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline #-fsanitize=address
+=======
+	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline
+>>>>>>> upstream/main
 	echo "done"
 
 clean:

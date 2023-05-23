@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 12:19:12 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/18 12:39:04 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:46:08 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
+<<<<<<< HEAD
 void	change_pwd(void)
+=======
+void	change_pwd(/* char *path */)
+>>>>>>> upstream/main
 {
 	t_env	*current;
 	char	*str;

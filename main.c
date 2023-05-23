@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:28:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/23 12:04:25 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:46:53 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ void	print_tokens(t_token *tokens)
 
 void	ft_sigint_handler()
 {
-	ft_putstr_fd("\n", 1);
+	printf("\n");
 	//rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+}
+
+void	ft_sigquit_handler()
+{
 }
 
 void	ft_init_signals()
@@ -45,13 +49,13 @@ void	ft_init_signals()
 
 int main(int argc, char *argv[], char *env[])
 {
-	(void)argc;
-	(void)argv;
+	if (argc > 1)
+		return ((void)argv, printf("Too many args\n"), 1);
 	get_env_list(env);
 	g_minishell.exit_s = 0;
-	ft_init_signals();
 	while (1)
 	{
+		ft_init_signals();
 		g_minishell.line = readline(PROMPT);
 		if (!g_minishell.line)
 		{
@@ -66,6 +70,7 @@ int main(int argc, char *argv[], char *env[])
 		g_minishell.ast = ft_parse();
 		if (g_minishell.parse_err.type)
 			ft_handle_parse_err();
+		signal(SIGQUIT, ft_sigquit_handler);
 		exec();
 		ft_clear_ast(&g_minishell.ast);
 	}

@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:13:52 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/23 13:41:52 by oakerkao         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/23 14:45:49 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +99,10 @@ int	check_redirection(t_io_node *io, t_context *ctx)
 
 int	exec_child(t_node *tree, t_context *ctx)
 {
+<<<<<<< HEAD
+=======
+	// int	status;
+>>>>>>> upstream/main
 	int	redirect;
 	int	pid;
 

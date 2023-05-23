@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:41:01 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/23 10:39:56 by oakerkao         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/23 15:32:08 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 #define ENV_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 typedef	struct		s_env
 {
