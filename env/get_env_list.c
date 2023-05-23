@@ -14,12 +14,18 @@
 
 void	get_env_list(char **enviro)
 {
+<<<<<<< HEAD
+=======
 	// t_env	*list;
+>>>>>>> upstream/main
 	int		i;
 
 	i = 0;
 	g_minishell.list = NULL;
+<<<<<<< HEAD
+=======
 	// list = g_minishell.list;
+>>>>>>> upstream/main
 	while (enviro[i])
 	{
 		add_node(new_node(get_key(enviro[i]), get_value(enviro[i])));

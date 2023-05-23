@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:28:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/23 14:50:13 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:46:53 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_tokens(t_token *tokens)
 void	ft_sigint_handler()
 {
 	printf("\n");
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -58,8 +58,12 @@ int main(int argc, char *argv[], char *env[])
 		ft_init_signals();
 		g_minishell.line = readline(PROMPT);
 		if (!g_minishell.line)
-			(ft_putstr_fd("exit\n", 1),
-			ft_clear_ast(&g_minishell.ast), exit(1));
+		{
+			ft_putstr_fd("exit\n", 1);
+			env_clear(&g_minishell.list);
+			ft_clear_ast(&g_minishell.ast);
+			exit(1);
+		}
 		g_minishell.tokens = ft_tokenize();
 		if (!g_minishell.tokens)
 			continue ;
@@ -70,4 +74,5 @@ int main(int argc, char *argv[], char *env[])
 		exec();
 		ft_clear_ast(&g_minishell.ast);
 	}
+	env_clear(&g_minishell.list);
 }

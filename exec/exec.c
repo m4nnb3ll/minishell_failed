@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:07:56 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/23 10:33:41 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 14:44:45 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +21,32 @@
 // T_OR
 // T_PIPE
 
-
 void	exec()
 {
 	t_node	*tree;
+<<<<<<< HEAD
+=======
 	// t_exec	exec;
 	int	child;
 	t_context	ctx;
+>>>>>>> upstream/main
 	t_node	*tmp;
-	int	status;
-	int	i = 0;
+	t_context	ctx;
+	t_wait		wait_var;
 
-	exec_init();
-	ctx.fd[0] = 0;
-	ctx.fd[1] = 1;
-	g_minishell.index = 0;
-	g_minishell.in_pipe = 0;
-	ctx.fd_close = NULL;
-	ctx.here_doc = NULL;
+	exec_init(&ctx, &wait_var);
 	tree = g_minishell.ast;
 	tmp = g_minishell.ast;
 	traverse_tree(tmp, &ctx);
-	child = exec_node(tree, &ctx);
+	wait_var.child = exec_node(tree, &ctx);
 	close_parent_here_doc(&ctx);
-	while (i < child)
+	while (wait_var.i < wait_var.child)
 	{
-		wait(&status);
-		i++;
+		wait(&wait_var.status);
+		wait_var.i++;
 	}
-	if (WIFEXITED(status))
-		g_minishell.exit_s = WEXITSTATUS(status);
+	if (WIFEXITED(wait_var.status))
+		g_minishell.exit_s = WEXITSTATUS(wait_var.status);
 }
 
 int	exec_node(t_node *tree, t_context *ctx)

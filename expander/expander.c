@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:04:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 18:48:55 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:32:03 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**put_twod_array(t_list *lst)
 		i++;
 	}
 	arr[i] = NULL;
+	//ft_lstclear(&lst, free);
 	return (arr);
 }
 
@@ -86,6 +87,7 @@ char	*char_join(char *str, char c)
 	}
 	result[i] = c;
 	result[i + 1] = '\0';
+	//free(str);
 	return (result);
 }
 

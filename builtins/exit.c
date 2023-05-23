@@ -6,11 +6,20 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:41:56 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/18 12:02:18 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:35:20 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+
+void	exit_error_msg(char *str)
+{
+	char	*error_msg;
+
+	error_msg = ft_strjoin("bash: exit: ", str);
+	error_msg = ft_strjoin(error_msg, ": numeric argument required\n");
+	ft_putstr_fd(error_msg, 2);
+}
 
 int	check_long(unsigned long long res, int sign)
 {
@@ -66,21 +75,26 @@ int	check_exit_arg(char *str)
 	}
 	if (is_number(str + i) == 0 || is_valid(str + i, sign) == 0)
 	{
-		printf("error\n");
-		exit(0);
+		exit_error_msg(str);
+		exit(255);
 	}
 	return (ft_atoi(str));
 }
 
 void	ft_exit(char **args)
 {
+	int	exit_value;
+
+	exit_value = 0;
+	printf("exit\n");
 	if (args[1])
 	{
 		if (args[2])
 		{
-			printf("error\n");
-			return ;
+			error_msg("exit", "too many arguments", 1);
+			exit(1);
 		}
-		check_exit_arg(args[1]);
+		exit_value = check_exit_arg(args[1]);
 	}
+	exit(exit_value);
 }

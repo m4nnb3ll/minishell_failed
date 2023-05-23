@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:32:13 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/23 14:43:57 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:47:34 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,19 @@
 # include "expander.h"
 # include <stdio.h>
 # include <fcntl.h>
-# include <signal.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 /*TEMP___START*/
 extern char			*types[];
 /*TEMP___END*/
 // EXEC START
+typedef struct s_wait
+{
+	int	i;
+	int status;	
+	int	child;
+} t_wait;
 typedef struct	s_exec
 {
 	char	*path;
@@ -69,7 +75,7 @@ typedef struct s_minishell
 	t_token		*curr_token;
 	t_node		*ast;
 	t_exec		exec;
-	int	in_pipe;
+	int			in_pipe;
 	t_parse_err	parse_err;
 }					t_minishell;
 
@@ -119,7 +125,8 @@ void	close_parent_here_doc(t_context *ctx);
 // exec_utils
 t_fd	*new_list(int content);
 void	add_list(t_fd **lst, t_fd *new);
-void	exec_init(void);
+void	exec_init(t_context *ctx, t_wait *wait_var);
+void	free_twod_array(char **arr);
 
 // traverse_tree
 void	traverse_tree(t_node *tree, t_context *ctx);

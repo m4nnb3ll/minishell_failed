@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:38:01 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/22 13:24:47 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:40:48 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	exec_pipe(t_node *tree, t_context *ctx)
 	add_list(&(rctx.fd_close), new_list(p[1]));
 	i += exec_node(tree->right, &rctx);
 
-	g_minishell.in_pipe = 0;
 	// close parent pipes
 	close(p[1]);
 	close(p[0]);
