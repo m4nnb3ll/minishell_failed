@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:04:54 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 18:40:21 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:01:30 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ char	**expander(char *str)
 			expand.tmp = expand.tmp->next;
 		}
 	}
-	return (put_twod_array(expand.lst));
+	return (ft_lstclear(&expand.tmp, NULL), put_twod_array(expand.lst));
 }

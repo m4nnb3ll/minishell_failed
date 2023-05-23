@@ -54,6 +54,9 @@ BUILTINS	:=	builtins/echo.c \
 EXPANDER	:=	expander/expander.c \
 				expander/expander_utils.c
 
+CLEARING	:=	clearing/minishell_clr.c \
+				# clearing/minishell_clr.c
+
 
 SRCS		:=	$(TOKENIZING)\
 				$(PARSING)\
@@ -61,6 +64,7 @@ SRCS		:=	$(TOKENIZING)\
 				$(EXEC)\
 				$(BUILTINS)\
 				$(EXPANDER)\
+				$(CLEARING)\
 				main.c
 
 OBJS		:= $(SRCS:.c=.o)

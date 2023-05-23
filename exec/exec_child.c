@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:13:52 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 17:58:22 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:39:39 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,17 @@ void	exec_child_helper(t_context **ctx, int redirect)
 	if (is_builtin_child() == 1)
 	{
 		exec_builtin_child();
+		ft_clear_minishell();
 		exit(0);
 	}
 	if (redirect == 0)
+	{
+		ft_clear_minishell();
 		exit(1);
+	}
 	if (execve(g_minishell.exec.path, g_minishell.exec.args, NULL) == -1)
 	{
-		free_twod_array(g_minishell.exec.args);
-		free(g_minishell.exec.path);
+		ft_clear_minishell();
 		exit(EXIT_FAILURE);
 	}
 }

@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   minishell_clr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/15 19:57:55 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 16:37:53 by abelayad         ###   ########.fr       */
+/*   Created: 2023/05/23 18:55:58 by abelayad          #+#    #+#             */
+/*   Updated: 2023/05/23 19:37:07 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*char	**put_env_twod(t_env *env)
+void	ft_free_exec(void)
 {
-	int		len;
-	char	**arr;
-	t_env	*tmp;
-	int		i;
-	char	*result;
+	if (g_minishell.exec.path)
+	{
+		free(g_minishell.exec.path);
+		g_minishell.exec.path = NULL;
+	}
+	if (g_minishell.exec.args)
+	{
+		ft_free_char2(g_minishell.exec.args);
+		g_minishell.exec.args = NULL;
+	}
+}
 
-	len = 0;
-	i = 0;
-	tmp = env;
-	while (tmp)
-	{
-		len++;
-		tmp = tmp->next;	
-	}
-	arr = malloc((len + 1) * sizeof(char *));
-	while(env)
-	{
-		result = ft_strjoin(key,);
-		arr[i] = ft_strdup(env->key);	
-		i++;
-		env = env->next;
-	}
-	arr[i] = NULL;
-	return (arr);
-}*/
+void	ft_clear_minishell(void)
+{
+	env_clear(&g_minishell.env_list);
+	free(g_minishell.line);
+	if (g_minishell.ast)
+		ft_clear_ast(&g_minishell.ast);
+	ft_free_exec();
+}

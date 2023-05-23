@@ -6,28 +6,13 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:28:41 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/23 18:41:28 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:02:24 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_minishell	g_minishell;
-
-// void	print_tokens(t_token *tokens)
-// {
-// 	t_token *tmp;
-// 	char *types[] = {"T_IDENTIFIER",
-// 		"<", ">", "<<", ">>", "|", "(", ")", "&&", "||", "newline"};
-
-// 	tmp = tokens;
-// 	while (tmp)
-// 	{
-// 		printf("%s ", types[tmp->type]);
-// 		tmp = tmp -> next;
-// 	}
-// 	printf("\n");
-// }
 
 void	ft_sigint_handler(int num)
 {
@@ -64,9 +49,8 @@ int	main(int argc, char *argv[], char *env[])
 		if (!g_minishell.line)
 		{
 			ft_putstr_fd("\nexit\n", 1);
-			env_clear(&g_minishell.list);
-			ft_clear_ast(&g_minishell.ast);
-			exit(1);
+			ft_clear_minishell();
+			exit(0);
 		}
 		g_minishell.tokens = ft_tokenize();
 		if (!g_minishell.tokens)
@@ -76,7 +60,6 @@ int	main(int argc, char *argv[], char *env[])
 			ft_handle_parse_err();
 		signal(SIGQUIT, ft_sigquit_handler);
 		exec();
-		ft_clear_ast(&g_minishell.ast);
+		ft_clear_minishell();
 	}
-	env_clear(&g_minishell.list);
 }

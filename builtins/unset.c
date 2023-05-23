@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:56:37 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 16:31:51 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:08:14 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	remove_node(char *key)
 	t_env	*prev;
 
 	prev = NULL;
-	current = g_minishell.list;
+	current = g_minishell.env_list;
 	while (current)
 	{
 		if (ft_strcmp(current->key, key) == 0)
@@ -26,7 +26,7 @@ void	remove_node(char *key)
 			if (prev)
 				prev->next = current->next;
 			else
-				g_minishell.list = current->next;
+				g_minishell.env_list = current->next;
 			free(current);
 			break ;
 		}

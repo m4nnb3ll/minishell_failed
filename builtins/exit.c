@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:41:56 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/05/23 16:31:49 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:38:59 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	check_exit_arg(char *str)
 	if (is_number(str + i) == 0 || is_valid(str + i, sign) == 0)
 	{
 		exit_error_msg(str);
+		ft_clear_minishell();
 		exit(255);
 	}
 	return (ft_atoi(str));
@@ -52,9 +53,11 @@ void	ft_exit(char **args)
 		if (args[2])
 		{
 			error_msg("exit", "too many arguments", 1);
+			ft_clear_minishell();
 			exit(1);
 		}
 		exit_value = check_exit_arg(args[1]);
 	}
+	ft_clear_minishell();
 	exit(exit_value);
 }
