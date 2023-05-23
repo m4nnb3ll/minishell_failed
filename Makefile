@@ -3,11 +3,8 @@ NAME		:= minishell
 LIBFT		:= libft.a
 LIBFT_PATH	:= "libraries/libft"
 
-<<<<<<< HEAD
-CC		:= gcc
-=======
 CC			:= cc
->>>>>>> upstream/main
+
 CFLAGS		:= -Wall -Werror -Wextra -g
 
 TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
@@ -75,11 +72,7 @@ $(LIBFT):
 	@echo "libft done."
 
 $(NAME): $(OBJS) $(LIBFT)
-<<<<<<< HEAD
-	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline #-fsanitize=address
-=======
 	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline
->>>>>>> upstream/main
 	echo "done"
 
 clean:
