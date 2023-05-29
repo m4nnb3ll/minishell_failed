@@ -6,7 +6,7 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:50:17 by abelayad          #+#    #+#             */
-/*   Updated: 2023/05/22 14:32:50 by abelayad         ###   ########.fr       */
+/*   Updated: 2023/05/29 11:45:02 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_handle_parse_err(void)
 	type = g_minishell.parse_err.type;
 	if (type)
 	{
-		ft_clear_ast(&g_minishell.ast);
 		if (type == E_SYNTAX)
 		{
 			if (!g_minishell.curr_token)
@@ -40,6 +39,7 @@ void	ft_handle_parse_err(void)
 			ft_putstr_fd("'\n", 2);
 			g_minishell.exit_s = 258;
 		}
+		ft_clear_ast(&g_minishell.ast);
 		ft_bzero(&g_minishell.parse_err, sizeof(t_parse_err));
 	}
 }
