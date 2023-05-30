@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:50:17 by abelayad          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/26 16:34:02 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/29 11:45:02 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +30,8 @@ void	ft_handle_parse_err(void)
 	types = (char *[]){"T_IDENTIFIER",
 		"<", ">", "<<", ">>", "|", "(", ")", "&&", "||", "newline"};
 	type = g_minishell.parse_err.type;
+	(void)token_type;
+	(void)types;
 	if (type)
 	{
 		if (type == E_SYNTAX)
@@ -34,8 +40,8 @@ void	ft_handle_parse_err(void)
 				token_type = T_NL;
 			else
 				token_type = g_minishell.curr_token->type;
-			ft_putstr_fd("msh: syntax error near unexpected token `", 2);
-			ft_putstr_fd(types[token_type], 2);
+			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+			//ft_putstr_fd(types[token_type], 2);
 			ft_putstr_fd("'\n", 2);
 			g_minishell.exit_s = 258;
 		}

@@ -6,13 +6,17 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 16:59:15 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/29 20:21:34 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 18:07:10 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_init(t_context *ctx, t_wait *wait_var)
+/*void	exec_init(t_context *ctx, t_wait *wait_var)
 {
 	wait_var->i = 0;
 	wait_var->child = 0;
@@ -25,7 +29,7 @@ void	exec_init(t_context *ctx, t_wait *wait_var)
 	ctx->fd[1] = 1;
 	ctx->fd_close = NULL;
 	ctx->here_doc = NULL;
-}
+}*/
 
 t_fd	*new_list(int content)
 {
@@ -66,3 +70,15 @@ void	free_twod_array(char **arr)
 	}
 	free(arr);
 }
+
+void	free_ever()
+{
+	//env_clear(&g_minishell.list);
+	if (g_minishell.exec.args)
+		free_twod_array(g_minishell.exec.args);
+	if (g_minishell.exec.path)
+		free(g_minishell.exec.path);
+	ft_clear_ast(&g_minishell.ast);
+	exit(g_minishell.exit_s);
+}
+

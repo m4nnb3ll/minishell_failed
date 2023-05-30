@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:01:26 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/28 17:56:52 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 16:31:48 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +57,5 @@ void	echo(char **cmd)
 	}
 	if (flag == 0)
 		ft_putstr_fd("\n", 1);
+	g_minishell.exit_s = 0;
 }

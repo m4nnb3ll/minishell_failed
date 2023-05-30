@@ -6,12 +6,20 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:07:56 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/29 16:04:58 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 17:52:20 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+<<<<<<< HEAD
+void	exec()
+{
+=======
 // T_CMD
 // T_AND
 // T_OR
@@ -21,22 +29,32 @@ void	exec(void)
 {
 	t_node		*tree;
 	t_node		*tmp;
+>>>>>>> upstream/main
 	t_context	ctx;
-	t_wait		wait_var;
+	int	child;
+	int	i;
+	int	status;
 
-	exec_init(&ctx, &wait_var);
-	tree = g_minishell.ast;
-	tmp = g_minishell.ast;
-	traverse_tree(tmp, &ctx);
-	wait_var.child = exec_node(tree, &ctx);
-	close_parent_here_doc(&ctx);
-	while (wait_var.i < wait_var.child)
+	g_minishell.exec.path = NULL;
+	g_minishell.exec.args = NULL;
+	g_minishell.index = 0;
+	g_minishell.in_pipe = 0;
+	ctx.fd[0] = 0;
+	ctx.fd[1] = 1;
+	ctx.fd_close = NULL;
+	ctx.here_doc = NULL;
+	i = 0;
+	traverse_tree(g_minishell.ast, &ctx);
+	child = exec_node(g_minishell.ast, &ctx);
+	while (i < child)
 	{
-		wait(&wait_var.status);
-		wait_var.i++;
+		wait(&status);	
+		i++;
 	}
-	if (WIFEXITED(wait_var.status))
-		g_minishell.exit_s = WEXITSTATUS(wait_var.status);
+	if (WIFEXITED(status))
+		g_minishell.exit_s = WEXITSTATUS(status);
+	close_parent_here_doc(&ctx);
+	ft_clear_ast(&g_minishell.ast);
 }
 
 int	exec_node(t_node *tree, t_context *ctx)
@@ -47,12 +65,17 @@ int	exec_node(t_node *tree, t_context *ctx)
 		return (exec_pipe(tree, ctx));
 	else if (tree->type == N_CMD)
 		return (exec_child(tree, ctx));
+<<<<<<< HEAD
+=======
 	else if (tree->type == N_OR)
 		return (exec_or(tree, ctx));
+>>>>>>> upstream/main
 	else if (tree->type == N_AND)
 		return (exec_and(tree, ctx));
+	else if (tree->type == N_OR)
+		return (exec_or(tree, ctx));
 	else
-		printf("nerror\n");
+		printf("exec_error\n");
 	return (0);
 }
 

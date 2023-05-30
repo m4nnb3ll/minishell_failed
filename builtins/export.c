@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:16:20 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/28 17:55:28 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 19:08:14 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +21,7 @@ void	export_error_msg(char *identifier)
 	ft_putstr_fd("minishell: export: `", 1);
 	ft_putstr_fd(identifier, 1);
 	ft_putstr_fd("': not a valid identifier\n", 1);
+	g_minishell.exit_s = 1;
 }
 
 void	export_list(void)
@@ -26,9 +31,9 @@ void	export_list(void)
 	list = g_minishell.env_list;
 	while (list)
 	{
-		if (list->value != NULL)
+		if (list->value != NULL && (ft_strcmp(list->key, "_") != 0))
 			printf("declare -x %s=\"%s\"\n", list->key, list->value);
-		else
+		else if (list->value == NULL && (ft_strcmp(list->key, "_") != 0))
 			printf("declare -x %s\n", list->key);
 		list = list->next;
 	}
@@ -66,16 +71,22 @@ void	export(char **argv)
 	while (argv[i])
 	{
 		if (check_key(argv[i]) == 0)
+		{
+			g_minishell.exit_s = 1;
 			export_error_msg(argv[i]);
+		}
 		else if (get_node(get_key(argv[i])))
 		{
+			g_minishell.exit_s = 0;
 			tmp = get_node(get_key(argv[i]));
 			if (get_value(argv[i]))
 				tmp->value = get_value(argv[i]);
-			return ;
 		}
 		else
+		{
+			g_minishell.exit_s = 0;
 			add_node(new_node(get_key(argv[i]), get_value(argv[i])));
+		}
 		i++;
 	}
 }

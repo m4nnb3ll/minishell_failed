@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 09:56:37 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/28 17:57:11 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 19:08:14 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +48,19 @@ void	unset(char **args)
 		return ;
 	while (args[i])
 	{
+<<<<<<< HEAD
+		if(check_key(args[i]) == 0)
+=======
 		if (check_key(args[i]) == 0)
 		{
 			printf("here\n");
+>>>>>>> upstream/main
 			return ;
-		}
 		else if (ft_strchr(args[i], '='))
 			return ;
 		else
 			remove_node(get_key(args[i]));
 		i++;
 	}
+	g_minishell.exit_s = 0;
 }

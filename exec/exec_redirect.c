@@ -6,77 +6,97 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:32:29 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/29 15:55:49 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 18:06:49 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	out(char *file, t_context *ctx)
+void	out(char *file, t_context *ctx)
 {
 	int		fd;
-	char	**expanded;
 
-	expanded = expander(file);
-	if (!expanded[0])
+	if (!file)
 	{
-		error_msg(file, "ambiguous redirect", 1);
-		g_minishell.exit_s = 1;
-		return (0);
+		g_minishell.error_code = AMBIGUOUS;
+		return ;
 	}
 	else
 	{
 		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd == -1)
-			printf("out_error\n");
+		{
+			check_write(file);
+			return ;
+		}
 		ctx->fd[1] = fd;
-		return (1);
+		return ;
 	}
-	return (0);
 }
 
-int	in(char *file, t_context *ctx)
+void	in(char *file, t_context *ctx)
 {
-	int	fd;
+	int		fd;
 
+	if (!file)
+	{
+		g_minishell.error_code = AMBIGUOUS;
+		return ;
+	}
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		error_msg(file, "No such file or directory", 1);
-		g_minishell.exit_s = 1;
-		return (0);
+		check_read(file);
+		return ;
 	}
 	ctx->fd[0] = fd;
-	return (1);
 }
 
-int	append(char *file, t_context *ctx)
+void	append(char *file, t_context *ctx)
 {
+<<<<<<< HEAD
+	int	fd;
+=======
 	int		fd;
 	char	**expanded;
+>>>>>>> upstream/main
 
-	expanded = expander(file);
-	if (!expanded[0])
+	if (!file)
 	{
-		error_msg(file, "ambiguous redirect", 1);
-		g_minishell.exit_s = 1;
-		return (0);
+		g_minishell.error_code = AMBIGUOUS;
+		return ;
 	}
-	else
+	fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (fd == -1)
 	{
-		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		if (fd == -1)
-			printf("app_error\n");
-		ctx->fd[1] = fd;
+		check_write(file);
+		return ;
 	}
-	return (1);
+	ctx->fd[1] = fd;
 }
 
-int	here_doc(char *delimiter, t_context *ctx)
+int	quotes_check(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if ((str[0] == '\'' || str[0] == '"') && (str[len - 1] == '\'' || str[len - 1] == '"'))
+		return (1);
+	return (0);
+}
+
+void	here_doc(char *delimiter, t_context *ctx)
 {
 	char	*red;
+	char	**expanded;
 	int		p[2];
+	int	quoted;
 
+	quoted = quotes_check(delimiter);
 	pipe(p);
 	while (1)
 	{
@@ -88,10 +108,22 @@ int	here_doc(char *delimiter, t_context *ctx)
 		}
 		if (ft_strcmp(red, delimiter) == 0)
 			break ;
-		ft_putstr_fd(red, p[1]);
-		ft_putstr_fd("\n", p[1]);
+		if (quoted == 0)
+		{
+			expanded = expander(red);
+			while (*expanded)
+			{
+				ft_putstr_fd(*expanded, p[1]);	
+				expanded++;
+			}
+			ft_putstr_fd("\n", p[1]);
+		}
+		else
+		{
+			ft_putstr_fd(red, p[1]);
+			ft_putstr_fd("\n", p[1]);
+		}
 	}
 	add_list(&(ctx->here_doc), new_list(p[0]));
 	close(p[1]);
-	return (1);
 }

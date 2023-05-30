@@ -6,7 +6,11 @@
 /*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 12:19:12 by oakerkao          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/05/28 17:51:08 by oakerkao         ###   ########.fr       */
+=======
 /*   Updated: 2023/05/23 16:31:47 by abelayad         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,8 @@ void	change_pwd(void)
 
 	str = getcwd(NULL, 0);
 	current = get_node("PWD");
-	current->value = str;
+	if (str && current)
+		current->value = str;
 }
 
 void	change_old_pwd(void)
@@ -29,7 +34,8 @@ void	change_old_pwd(void)
 
 	old = get_node("OLDPWD");
 	current = get_node("PWD");
-	old->value = current->value;
+	if (old && current)
+		old->value = current->value;
 }
 
 void	change_to_home(void)
@@ -40,7 +46,17 @@ void	change_to_home(void)
 	change_old_pwd();
 	home = get_node("HOME");
 	current = get_node("PWD");
-	current->value = home->value;
+	if (home && current)
+	{
+		current->value = home->value;
+		chdir(home->value);
+		g_minishell.exit_s = 0;
+	}
+	else
+	{
+		printf("minishell: cd: HOME not set\n");
+		g_minishell.exit_s = 1;
+	}
 }
 
 void	cd(char *path)
@@ -52,9 +68,11 @@ void	cd(char *path)
 	}
 	if (chdir(path) == -1)
 	{
-		printf("error\n");
+		printf("minishell: %s: No such file or directory\n", path);
+		g_minishell.exit_s = 1;
 		return ;
 	}
 	change_old_pwd();
 	change_pwd();
+	g_minishell.exit_s = 0;
 }

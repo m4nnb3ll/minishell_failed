@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:10:08 by oakerkao          #+#    #+#             */
-/*   Updated: 2022/10/30 15:31:30 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:44:41 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_lstdelone(t_list	*lst, void (*del)(void *))
 		return ;
 	p = lst;
 	p = p -> next;
-	del(lst -> content);
+	if (lst->content)
+		del(lst -> content);
 	free(lst);
 }

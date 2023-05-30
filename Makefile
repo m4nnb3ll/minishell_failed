@@ -5,7 +5,7 @@ LIBFT_PATH	:= "libraries/libft"
 
 CC			:= cc
 
-CFLAGS		:= -Wall -Werror -Wextra -g
+CFLAGS		:= #-Wall -Werror -Wextra -g
 
 TOKENIZING	:=	tokenizing/tokenizer_appenders.c \
 				tokenizing/tokenizer_lst.c \
@@ -31,16 +31,23 @@ ENV			:=	env/add_node.c \
 
 EXEC		:=	exec/exec.c \
 				exec/path_getter.c \
+<<<<<<< HEAD
+=======
 				exec/cmd_getter.c \
 				exec/exec_redirect.c \
 				exec/exec_pipe.c \
 				exec/exec_child_utils.c \
+>>>>>>> upstream/main
 				exec/exec_child.c\
+				exec/exec_pipe.c \
+				exec/exist_check.c\
+				exec/exec_utils.c\
+				exec/close_fds.c\
+				exec/exec_redirect.c \
 				exec/error_msg.c\
 				exec/exit_status.c\
-				exec/close_fds.c\
-				exec/exec_utils.c\
 				exec/traverse_tree.c\
+				exec/exec_builtin.c
 
 BUILTINS	:=	builtins/echo.c \
 				builtins/cd.c \
@@ -80,9 +87,14 @@ $(LIBFT):
 	@make -C $(LIBFT_PATH)
 	@echo "libft done."
 
+<<<<<<< HEAD
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -lreadline #-fsanitize=address
+=======
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline
+>>>>>>> upstream/main
 	echo "done"
 
 clean:
